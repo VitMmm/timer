@@ -237,6 +237,7 @@
 
       <div class="settings-panel">
         <button id="settingsBtn">⚙️ Настройки</button>
+        <button id="reloadBtn" style="display: none;">🔄 Обновить из GitHub</button>
         <div class="file-status" id="fileStatus">Автосохранение отключено</div>
         <div class="save-status" id="saveStatus" style="display: none"></div>
       </div>
@@ -331,12 +332,15 @@
       // Обновление статуса файла
       function updateFileStatus() {
         const statusEl = document.getElementById('fileStatus');
+        const reloadBtn = document.getElementById('reloadBtn');
         if (githubConfig && githubConfig.token && githubConfig.owner && githubConfig.repo) {
           statusEl.textContent = '✅ Автосохранение активно';
           statusEl.style.color = '#48bb78';
+          reloadBtn.style.display = 'block';
         } else {
           statusEl.textContent = '⚠️ Автосохранение отключено';
           statusEl.style.color = '#f56565';
+          reloadBtn.style.display = 'none';
         }
       }
 
@@ -509,24 +513,55 @@
         }, 1000); // Сохраняем через 1 секунду после последнего изменения
       }
 
-      // Загрузка задач при загрузке страницы
-      async function loadTasksOnInit() {
+      // Загрузка задач из GitHub API
+      async function loadTasksFromGitHub() {
+        if (!githubConfig || !githubConfig.token) {
+          return false;
+        }
         try {
-          // Пробуем загрузить tasks.json через fetch
-          const response = await fetch('./tasks.json');
+          const response = await fetch(githubContentsUrl('tasks.json'), {
+            headers: githubApiHeaders(),
+          });
           if (response.ok) {
             const data = await response.json();
-            tasks = data;
+            // Декодируем содержимое из base64
+            const content = decodeURIComponent(escape(atob(data.content)));
+            tasks = JSON.parse(content);
+            fileSha = data.sha;
             renderTasks();
             restoreTimers();
-            // Получаем SHA файла для будущих обновлений
-            if (githubConfig) {
-              fileSha = await getFileSha();
-            }
+            console.log('Задачи загружены из GitHub:', tasks.length);
+            return true;
           }
         } catch (error) {
-          // Файл не найден или ошибка - это нормально
-          console.log('Файл tasks.json не найден, начинаем с пустого списка');
+          console.error('Ошибка загрузки из GitHub:', error);
+        }
+        return false;
+      }
+
+      // Загрузка задач при загрузке страницы
+      async function loadTasksOnInit() {
+        // Сначала пробуем загрузить из GitHub API (если настроен)
+        const loadedFromGitHub = await loadTasksFromGitHub();
+        
+        if (!loadedFromGitHub) {
+          // Fallback: пробуем загрузить локальный файл
+          try {
+            const response = await fetch('./tasks.json');
+            if (response.ok) {
+              const data = await response.json();
+              tasks = data;
+              renderTasks();
+              restoreTimers();
+              // Получаем SHA файла для будущих обновлений
+              if (githubConfig) {
+                fileSha = await getFileSha();
+              }
+            }
+          } catch (error) {
+            // Файл не найден или ошибка - это нормально
+            console.log('Файл tasks.json не найден, начинаем с пустого списка');
+          }
         }
       }
 
@@ -715,6 +750,14 @@
       // Обработчики событий
       document.getElementById('addTaskBtn').addEventListener('click', addTask);
       document.getElementById('settingsBtn').addEventListener('click', showSettings);
+      document.getElementById('reloadBtn').addEventListener('click', async () => {
+        const loaded = await loadTasksFromGitHub();
+        if (loaded) {
+          showSaveStatus('✓ Данные обновлены из GitHub');
+        } else {
+          showSaveStatus('✗ Не удалось загрузить данные', true);
+        }
+      });
       document.getElementById('saveSettingsBtn').addEventListener('click', saveSettingsAndClose);
       document.getElementById('cancelSettingsBtn').addEventListener('click', hideSettings);
 
