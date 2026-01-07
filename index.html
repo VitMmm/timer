@@ -142,9 +142,6 @@
         padding: 20px;
         border-radius: 15px;
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
         transition: transform 0.2s;
       }
 
@@ -153,11 +150,115 @@
         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
       }
 
+      .task-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 15px;
+      }
+
+      .task-main-info {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
       .task-info {
         flex: 1;
         display: flex;
         flex-direction: column;
         gap: 8px;
+      }
+
+      .subtimers-section {
+        margin-top: 15px;
+        padding-top: 15px;
+        border-top: 2px solid #f0f0f0;
+      }
+
+      .subtimers-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 10px;
+      }
+
+      .subtimers-title {
+        font-size: 14px;
+        font-weight: 600;
+        color: #666;
+      }
+
+      .btn-add-subtimer {
+        padding: 6px 12px;
+        font-size: 12px;
+        background: #667eea;
+      }
+
+      .btn-add-subtimer:hover {
+        background: #5568d3;
+      }
+
+      .subtimers-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .subtimer-item {
+        background: #f8f9fa;
+        padding: 12px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+      }
+
+      .subtimer-info {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .subtimer-name {
+        font-size: 14px;
+        color: #333;
+        min-width: 120px;
+      }
+
+      .subtimer-time {
+        font-size: 18px;
+        font-weight: 700;
+        color: #764ba2;
+        font-variant-numeric: tabular-nums;
+        min-width: 70px;
+      }
+
+      .subtimer-actions {
+        display: flex;
+        gap: 8px;
+      }
+
+      .subtimer-btn {
+        padding: 6px 12px;
+        font-size: 12px;
+      }
+
+      .subtimer-input {
+        padding: 6px 10px;
+        border: 2px solid #e0e0e0;
+        border-radius: 6px;
+        font-size: 14px;
+        flex: 1;
+        max-width: 200px;
+      }
+
+      .subtimer-input:focus {
+        outline: none;
+        border-color: #667eea;
       }
 
       .task-name {
@@ -214,7 +315,7 @@
       }
 
       @media (max-width: 600px) {
-        .task-item {
+        .task-header {
           flex-direction: column;
           align-items: flex-start;
           gap: 15px;
@@ -228,6 +329,16 @@
         .form-group {
           flex-direction: column;
         }
+
+        .subtimer-item {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .subtimer-actions {
+          width: 100%;
+          justify-content: space-between;
+        }
       }
     </style>
   </head>
@@ -237,7 +348,7 @@
 
       <div class="settings-panel">
         <button id="settingsBtn">⚙️ Настройки</button>
-        <button id="reloadBtn" style="display: none;">🔄 Обновить из GitHub</button>
+        <button id="reloadBtn" style="display: none">🔄 Обновить из GitHub</button>
         <div class="file-status" id="fileStatus">Автосохранение отключено</div>
         <div class="save-status" id="saveStatus" style="display: none"></div>
       </div>
@@ -527,6 +638,12 @@
             // Декодируем содержимое из base64
             const content = decodeURIComponent(escape(atob(data.content)));
             tasks = JSON.parse(content);
+            // Миграция: добавляем пустой массив подтаймеров для старых задач
+            tasks.forEach((task) => {
+              if (!task.subtimers) {
+                task.subtimers = [];
+              }
+            });
             fileSha = data.sha;
             renderTasks();
             restoreTimers();
@@ -543,7 +660,7 @@
       async function loadTasksOnInit() {
         // Сначала пробуем загрузить из GitHub API (если настроен)
         const loadedFromGitHub = await loadTasksFromGitHub();
-        
+
         if (!loadedFromGitHub) {
           // Fallback: пробуем загрузить локальный файл
           try {
@@ -551,6 +668,12 @@
             if (response.ok) {
               const data = await response.json();
               tasks = data;
+              // Миграция: добавляем пустой массив подтаймеров для старых задач
+              tasks.forEach((task) => {
+                if (!task.subtimers) {
+                  task.subtimers = [];
+                }
+              });
               renderTasks();
               restoreTimers();
               // Получаем SHA файла для будущих обновлений
@@ -634,6 +757,7 @@
           name: taskName,
           time: 0,
           isRunning: false,
+          subtimers: [],
         };
 
         tasks.push(newTask);
@@ -682,16 +806,120 @@
       // Удаление задачи
       async function deleteTask(taskId) {
         if (confirm('Вы уверены, что хотите удалить эту задачу?')) {
-          // Остановка таймера, если он запущен
+          const task = tasks.find((t) => t.id === taskId);
+          if (!task) return;
+
+          // Остановка основного таймера
           if (timers[taskId]) {
             clearInterval(timers[taskId]);
             delete timers[taskId];
+          }
+
+          // Остановка всех подтаймеров
+          if (task.subtimers) {
+            task.subtimers.forEach((subtimer) => {
+              const timerKey = `${taskId}_${subtimer.id}`;
+              if (timers[timerKey]) {
+                clearInterval(timers[timerKey]);
+                delete timers[timerKey];
+              }
+            });
           }
 
           tasks = tasks.filter((t) => t.id !== taskId);
           await autoSaveTasks();
           renderTasks();
         }
+      }
+
+      // Добавление подтаймера
+      async function addSubtimer(taskId) {
+        const task = tasks.find((t) => t.id === taskId);
+        if (!task) return;
+
+        const subtimerName = prompt('Введите название подтаймера:');
+        if (!subtimerName || !subtimerName.trim()) return;
+
+        if (!task.subtimers) {
+          task.subtimers = [];
+        }
+
+        const newSubtimer = {
+          id: Date.now() + Math.random(),
+          name: subtimerName.trim(),
+          time: 0,
+          isRunning: false,
+        };
+
+        task.subtimers.push(newSubtimer);
+        await autoSaveTasks();
+        renderTasks();
+      }
+
+      // Запуск/остановка подтаймера
+      async function toggleSubtimer(taskId, subtimerId) {
+        const task = tasks.find((t) => t.id === taskId);
+        if (!task || !task.subtimers) return;
+
+        const subtimer = task.subtimers.find((st) => st.id === subtimerId);
+        if (!subtimer) return;
+
+        const timerKey = `${taskId}_${subtimerId}`;
+
+        if (subtimer.isRunning) {
+          // Остановка подтаймера
+          subtimer.isRunning = false;
+          if (timers[timerKey]) {
+            clearInterval(timers[timerKey]);
+            delete timers[timerKey];
+          }
+        } else {
+          // Запуск подтаймера
+          subtimer.isRunning = true;
+          timers[timerKey] = setInterval(async () => {
+            subtimer.time++;
+            updateSubtimerTime(taskId, subtimerId);
+            await autoSaveTasks();
+          }, 1000);
+        }
+
+        await autoSaveTasks();
+        renderTasks();
+      }
+
+      // Обновление отображения времени подтаймера
+      function updateSubtimerTime(taskId, subtimerId) {
+        const task = tasks.find((t) => t.id === taskId);
+        if (!task || !task.subtimers) return;
+
+        const subtimer = task.subtimers.find((st) => st.id === subtimerId);
+        if (!subtimer) return;
+
+        const subtimerElement = document.querySelector(
+          `[data-task-id="${taskId}"] [data-subtimer-id="${subtimerId}"] .subtimer-time`
+        );
+        if (subtimerElement) {
+          subtimerElement.textContent = formatTime(subtimer.time);
+        }
+      }
+
+      // Удаление подтаймера
+      async function deleteSubtimer(taskId, subtimerId) {
+        if (!confirm('Вы уверены, что хотите удалить этот подтаймер?')) return;
+
+        const task = tasks.find((t) => t.id === taskId);
+        if (!task || !task.subtimers) return;
+
+        // Остановка таймера, если он запущен
+        const timerKey = `${taskId}_${subtimerId}`;
+        if (timers[timerKey]) {
+          clearInterval(timers[timerKey]);
+          delete timers[timerKey];
+        }
+
+        task.subtimers = task.subtimers.filter((st) => st.id !== subtimerId);
+        await autoSaveTasks();
+        renderTasks();
       }
 
       // Отрисовка списка задач
@@ -704,27 +932,80 @@
         }
 
         tasksList.innerHTML = tasks
-          .map(
-            (task) => `
-          <div class="task-item" data-task-id="${task.id}">
-            <div class="task-info">
-              <div class="task-name">${escapeHtml(task.name)}</div>
-              <div class="task-time">${formatTime(task.time)}</div>
-            </div>
-            <div class="task-actions">
-              <button 
-                class="${task.isRunning ? 'btn-stop' : 'btn-start'}" 
-                onclick="toggleTimer(${task.id})"
-              >
-                ${task.isRunning ? '⏸ Остановить' : '▶ Запустить'}
+          .map((task) => {
+            const subtimersHtml = task.subtimers && task.subtimers.length > 0
+              ? `
+          <div class="subtimers-section">
+            <div class="subtimers-header">
+              <div class="subtimers-title">Подтаймеры:</div>
+              <button class="btn-add-subtimer" onclick="addSubtimer(${task.id})">
+                + Добавить подтаймер
               </button>
-              <button class="btn-delete" onclick="deleteTask(${task.id})">
-                🗑 Удалить
+            </div>
+            <div class="subtimers-list">
+              ${task.subtimers
+                .map(
+                  (subtimer) => `
+              <div class="subtimer-item" data-subtimer-id="${subtimer.id}">
+                <div class="subtimer-info">
+                  <div class="subtimer-name">${escapeHtml(subtimer.name)}</div>
+                  <div class="subtimer-time">${formatTime(subtimer.time)}</div>
+                </div>
+                <div class="subtimer-actions">
+                  <button 
+                    class="subtimer-btn ${subtimer.isRunning ? 'btn-stop' : 'btn-start'}" 
+                    onclick="toggleSubtimer(${task.id}, ${subtimer.id})"
+                  >
+                    ${subtimer.isRunning ? '⏸' : '▶'}
+                  </button>
+                  <button 
+                    class="subtimer-btn btn-delete" 
+                    onclick="deleteSubtimer(${task.id}, ${subtimer.id})"
+                  >
+                    🗑
+                  </button>
+                </div>
+              </div>
+              `
+                )
+                .join('')}
+            </div>
+          </div>
+        `
+              : `
+          <div class="subtimers-section">
+            <div class="subtimers-header">
+              <div class="subtimers-title">Подтаймеры:</div>
+              <button class="btn-add-subtimer" onclick="addSubtimer(${task.id})">
+                + Добавить подтаймер
               </button>
             </div>
           </div>
-        `,
-          )
+        `;
+
+            return `
+          <div class="task-item" data-task-id="${task.id}">
+            <div class="task-header">
+              <div class="task-main-info">
+                <div class="task-name">${escapeHtml(task.name)}</div>
+                <div class="task-time">${formatTime(task.time)}</div>
+              </div>
+              <div class="task-actions">
+                <button 
+                  class="${task.isRunning ? 'btn-stop' : 'btn-start'}" 
+                  onclick="toggleTimer(${task.id})"
+                >
+                  ${task.isRunning ? '⏸ Остановить' : '▶ Запустить'}
+                </button>
+                <button class="btn-delete" onclick="deleteTask(${task.id})">
+                  🗑 Удалить
+                </button>
+              </div>
+            </div>
+            ${subtimersHtml}
+          </div>
+        `;
+          })
           .join('');
       }
 
@@ -738,10 +1019,17 @@
       // Восстановление таймеров при загрузке страницы
       function restoreTimers() {
         tasks.forEach((task) => {
+          // Останавливаем основной таймер
           if (task.isRunning) {
-            // При загрузке страницы таймеры не запускаются автоматически
-            // Пользователь должен запустить их вручную
             task.isRunning = false;
+          }
+          // Останавливаем все подтаймеры
+          if (task.subtimers) {
+            task.subtimers.forEach((subtimer) => {
+              if (subtimer.isRunning) {
+                subtimer.isRunning = false;
+              }
+            });
           }
         });
         autoSaveTasks();
