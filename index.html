@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Таймер задач</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      h1 {
+        color: white;
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: 2.5em;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+      }
+
+      .add-task-form {
+        background: white;
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        margin-bottom: 30px;
+      }
+
+      .form-group {
+        display: flex;
+        gap: 10px;
+      }
+
+      input[type='text'] {
+        flex: 1;
+        padding: 12px 15px;
+        border: 2px solid #e0e0e0;
+        border-radius: 8px;
+        font-size: 16px;
+        transition: border-color 0.3s;
+      }
+
+      input[type='text']:focus {
+        outline: none;
+        border-color: #667eea;
+      }
+
+      button {
+        padding: 12px 25px;
+        background: #667eea;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+
+      button:hover {
+        background: #5568d3;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+      }
+
+      button:active {
+        transform: translateY(0);
+      }
+
+      .tasks-list {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .task-item {
+        background: white;
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        transition: transform 0.2s;
+      }
+
+      .task-item:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      .task-info {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .task-name {
+        font-size: 18px;
+        font-weight: 600;
+        color: #333;
+      }
+
+      .task-time {
+        font-size: 24px;
+        font-weight: 700;
+        color: #667eea;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .task-actions {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+
+      .btn-start {
+        background: #48bb78;
+      }
+
+      .btn-start:hover {
+        background: #38a169;
+      }
+
+      .btn-stop {
+        background: #f56565;
+      }
+
+      .btn-stop:hover {
+        background: #e53e3e;
+      }
+
+      .btn-delete {
+        background: #a0aec0;
+        padding: 8px 15px;
+        font-size: 14px;
+      }
+
+      .btn-delete:hover {
+        background: #718096;
+      }
+
+      .empty-state {
+        text-align: center;
+        color: white;
+        padding: 40px;
+        font-size: 18px;
+        opacity: 0.9;
+      }
+
+      @media (max-width: 600px) {
+        .task-item {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 15px;
+        }
+
+        .task-actions {
+          width: 100%;
+          justify-content: space-between;
+        }
+
+        .form-group {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>⏱️ Таймер задач</h1>
+
+      <div class="add-task-form">
+        <div class="form-group">
+          <input type="text" id="taskInput" placeholder="Введите название задачи..." autocomplete="off" />
+          <button id="addTaskBtn">Добавить задачу</button>
+        </div>
+      </div>
+
+      <div class="tasks-list" id="tasksList">
+        <div class="empty-state">Пока нет задач. Добавьте первую задачу!</div>
+      </div>
+    </div>
+
+    <script>
+      // Хранилище задач
+      let tasks = [];
+      let timers = {}; // Объект для хранения интервалов таймеров
+
+      // Загрузка задач из localStorage при загрузке страницы
+      function loadTasks() {
+        const saved = localStorage.getItem('timerTasks');
+        if (saved) {
+          tasks = JSON.parse(saved);
+          renderTasks();
+        }
+      }
+
+      // Сохранение задач в localStorage
+      function saveTasks() {
+        localStorage.setItem('timerTasks', JSON.stringify(tasks));
+      }
+
+      // Форматирование времени (секунды в ЧЧ:ММ:СС)
+      function formatTime(seconds) {
+        const hours = Math.floor(seconds / 3600);
+        const minutes = Math.floor((seconds % 3600) / 60);
+        const secs = seconds % 60;
+        return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+      }
+
+      // Добавление новой задачи
+      function addTask() {
+        const input = document.getElementById('taskInput');
+        const taskName = input.value.trim();
+
+        if (!taskName) {
+          alert('Пожалуйста, введите название задачи');
+          return;
+        }
+
+        const newTask = {
+          id: Date.now(),
+          name: taskName,
+          time: 0,
+          isRunning: false,
+        };
+
+        tasks.push(newTask);
+        input.value = '';
+        saveTasks();
+        renderTasks();
+      }
+
+      // Запуск/остановка таймера
+      function toggleTimer(taskId) {
+        const task = tasks.find((t) => t.id === taskId);
+        if (!task) return;
+
+        if (task.isRunning) {
+          // Остановка таймера
+          task.isRunning = false;
+          if (timers[taskId]) {
+            clearInterval(timers[taskId]);
+            delete timers[taskId];
+          }
+        } else {
+          // Запуск таймера
+          task.isRunning = true;
+          timers[taskId] = setInterval(() => {
+            task.time++;
+            updateTaskTime(taskId);
+            saveTasks();
+          }, 1000);
+        }
+
+        saveTasks();
+        renderTasks();
+      }
+
+      // Обновление отображения времени задачи
+      function updateTaskTime(taskId) {
+        const task = tasks.find((t) => t.id === taskId);
+        if (!task) return;
+
+        const taskElement = document.querySelector(`[data-task-id="${taskId}"] .task-time`);
+        if (taskElement) {
+          taskElement.textContent = formatTime(task.time);
+        }
+      }
+
+      // Удаление задачи
+      function deleteTask(taskId) {
+        if (confirm('Вы уверены, что хотите удалить эту задачу?')) {
+          // Остановка таймера, если он запущен
+          if (timers[taskId]) {
+            clearInterval(timers[taskId]);
+            delete timers[taskId];
+          }
+
+          tasks = tasks.filter((t) => t.id !== taskId);
+          saveTasks();
+          renderTasks();
+        }
+      }
+
+      // Отрисовка списка задач
+      function renderTasks() {
+        const tasksList = document.getElementById('tasksList');
+
+        if (tasks.length === 0) {
+          tasksList.innerHTML = '<div class="empty-state">Пока нет задач. Добавьте первую задачу!</div>';
+          return;
+        }
+
+        tasksList.innerHTML = tasks
+          .map(
+            (task) => `
+          <div class="task-item" data-task-id="${task.id}">
+            <div class="task-info">
+              <div class="task-name">${escapeHtml(task.name)}</div>
+              <div class="task-time">${formatTime(task.time)}</div>
+            </div>
+            <div class="task-actions">
+              <button 
+                class="${task.isRunning ? 'btn-stop' : 'btn-start'}" 
+                onclick="toggleTimer(${task.id})"
+              >
+                ${task.isRunning ? '⏸ Остановить' : '▶ Запустить'}
+              </button>
+              <button class="btn-delete" onclick="deleteTask(${task.id})">
+                🗑 Удалить
+              </button>
+            </div>
+          </div>
+        `,
+          )
+          .join('');
+      }
+
+      // Экранирование HTML для безопасности
+      function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+      }
+
+      // Восстановление таймеров при загрузке страницы
+      function restoreTimers() {
+        tasks.forEach((task) => {
+          if (task.isRunning) {
+            // При загрузке страницы таймеры не запускаются автоматически
+            // Пользователь должен запустить их вручную
+            task.isRunning = false;
+          }
+        });
+        saveTasks();
+      }
+
+      // Обработчики событий
+      document.getElementById('addTaskBtn').addEventListener('click', addTask);
+
+      document.getElementById('taskInput').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          addTask();
+        }
+      });
+
+      // Инициализация при загрузке страницы
+      loadTasks();
+      restoreTimers();
+      renderTasks();
+    </script>
+  </body>
+</html>
