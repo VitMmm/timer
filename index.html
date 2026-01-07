@@ -39,6 +39,29 @@
         margin-bottom: 30px;
       }
 
+      .file-controls {
+        background: white;
+        padding: 15px 25px;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .file-controls button {
+        padding: 10px 20px;
+        font-size: 14px;
+      }
+
+      .file-status {
+        color: #666;
+        font-size: 14px;
+        margin-left: auto;
+      }
+
       .form-group {
         display: flex;
         gap: 10px;
@@ -184,6 +207,13 @@
     <div class="container">
       <h1>⏱️ Таймер задач</h1>
 
+      <div class="file-controls">
+        <button id="loadFileBtn">📂 Загрузить из файла</button>
+        <button id="saveFileBtn">💾 Сохранить в файл</button>
+        <input type="file" id="fileInput" accept=".json" style="display: none" />
+        <div class="file-status" id="fileStatus">Файл не выбран</div>
+      </div>
+
       <div class="add-task-form">
         <div class="form-group">
           <input type="text" id="taskInput" placeholder="Введите название задачи..." autocomplete="off" />
@@ -200,19 +230,146 @@
       // Хранилище задач
       let tasks = [];
       let timers = {}; // Объект для хранения интервалов таймеров
+      let fileHandle = null; // Handle для работы с файлом через File System Access API
 
-      // Загрузка задач из localStorage при загрузке страницы
-      function loadTasks() {
-        const saved = localStorage.getItem('timerTasks');
-        if (saved) {
-          tasks = JSON.parse(saved);
-          renderTasks();
+      // Обновление статуса файла
+      function updateFileStatus() {
+        const statusEl = document.getElementById('fileStatus');
+        if (fileHandle) {
+          statusEl.textContent = 'Файл выбран';
+          statusEl.style.color = '#48bb78';
+        } else {
+          statusEl.textContent = 'Файл не выбран';
+          statusEl.style.color = '#666';
         }
       }
 
-      // Сохранение задач в localStorage
-      function saveTasks() {
-        localStorage.setItem('timerTasks', JSON.stringify(tasks));
+      // Загрузка задач из JSON файла
+      async function loadTasksFromFile() {
+        try {
+          // Пробуем использовать File System Access API
+          if ('showOpenFilePicker' in window) {
+            [fileHandle] = await window.showOpenFilePicker({
+              types: [
+                {
+                  description: 'JSON файлы',
+                  accept: { 'application/json': ['.json'] },
+                },
+              ],
+            });
+            const file = await fileHandle.getFile();
+            const text = await file.text();
+            tasks = JSON.parse(text);
+            updateFileStatus();
+            renderTasks();
+            restoreTimers();
+          } else {
+            // Fallback: используем input file
+            document.getElementById('fileInput').click();
+          }
+        } catch (error) {
+          if (error.name !== 'AbortError') {
+            console.error('Ошибка загрузки файла:', error);
+            alert('Ошибка загрузки файла');
+          }
+        }
+      }
+
+      // Загрузка задач из input file (fallback)
+      function loadTasksFromInput(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          try {
+            tasks = JSON.parse(e.target.result);
+            renderTasks();
+            restoreTimers();
+            updateFileStatus();
+          } catch (error) {
+            console.error('Ошибка парсинга JSON:', error);
+            alert('Ошибка чтения файла. Убедитесь, что файл содержит валидный JSON.');
+          }
+        };
+        reader.readAsText(file);
+      }
+
+      // Сохранение задач в JSON файл
+      async function saveTasksToFile() {
+        try {
+          const data = JSON.stringify(tasks, null, 2);
+
+          // Пробуем использовать File System Access API
+          if ('showSaveFilePicker' in window) {
+            let handle = fileHandle;
+            if (!handle) {
+              handle = await window.showSaveFilePicker({
+                types: [
+                  {
+                    description: 'JSON файлы',
+                    accept: { 'application/json': ['.json'] },
+                  },
+                ],
+                suggestedName: 'tasks.json',
+              });
+              fileHandle = handle;
+            }
+
+            const writable = await handle.createWritable();
+            await writable.write(data);
+            await writable.close();
+            updateFileStatus();
+          } else {
+            // Fallback: скачиваем файл
+            const blob = new Blob([data], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'tasks.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+          }
+        } catch (error) {
+          if (error.name !== 'AbortError') {
+            console.error('Ошибка сохранения файла:', error);
+            alert('Ошибка сохранения файла');
+          }
+        }
+      }
+
+      // Автоматическое сохранение (если файл уже выбран)
+      async function autoSaveTasks() {
+        if (fileHandle) {
+          try {
+            const data = JSON.stringify(tasks, null, 2);
+            const writable = await fileHandle.createWritable();
+            await writable.write(data);
+            await writable.close();
+          } catch (error) {
+            console.error('Ошибка автосохранения:', error);
+          }
+        }
+      }
+
+      // Загрузка задач при загрузке страницы (пробуем загрузить tasks.json)
+      async function loadTasksOnInit() {
+        try {
+          // Пробуем загрузить tasks.json через fetch
+          const response = await fetch('./tasks.json');
+          if (response.ok) {
+            const data = await response.json();
+            tasks = data;
+            renderTasks();
+            restoreTimers();
+            updateFileStatus();
+          }
+        } catch (error) {
+          // Файл не найден или ошибка - это нормально
+          console.log('Файл tasks.json не найден, начинаем с пустого списка');
+        }
       }
 
       // Форматирование времени (секунды в ЧЧ:ММ:СС)
@@ -224,7 +381,7 @@
       }
 
       // Добавление новой задачи
-      function addTask() {
+      async function addTask() {
         const input = document.getElementById('taskInput');
         const taskName = input.value.trim();
 
@@ -242,12 +399,12 @@
 
         tasks.push(newTask);
         input.value = '';
-        saveTasks();
+        await autoSaveTasks();
         renderTasks();
       }
 
       // Запуск/остановка таймера
-      function toggleTimer(taskId) {
+      async function toggleTimer(taskId) {
         const task = tasks.find((t) => t.id === taskId);
         if (!task) return;
 
@@ -261,14 +418,14 @@
         } else {
           // Запуск таймера
           task.isRunning = true;
-          timers[taskId] = setInterval(() => {
+          timers[taskId] = setInterval(async () => {
             task.time++;
             updateTaskTime(taskId);
-            saveTasks();
+            await autoSaveTasks();
           }, 1000);
         }
 
-        saveTasks();
+        await autoSaveTasks();
         renderTasks();
       }
 
@@ -284,7 +441,7 @@
       }
 
       // Удаление задачи
-      function deleteTask(taskId) {
+      async function deleteTask(taskId) {
         if (confirm('Вы уверены, что хотите удалить эту задачу?')) {
           // Остановка таймера, если он запущен
           if (timers[taskId]) {
@@ -293,7 +450,7 @@
           }
 
           tasks = tasks.filter((t) => t.id !== taskId);
-          saveTasks();
+          await autoSaveTasks();
           renderTasks();
         }
       }
@@ -348,11 +505,14 @@
             task.isRunning = false;
           }
         });
-        saveTasks();
+        autoSaveTasks();
       }
 
       // Обработчики событий
       document.getElementById('addTaskBtn').addEventListener('click', addTask);
+      document.getElementById('loadFileBtn').addEventListener('click', loadTasksFromFile);
+      document.getElementById('saveFileBtn').addEventListener('click', saveTasksToFile);
+      document.getElementById('fileInput').addEventListener('change', loadTasksFromInput);
 
       document.getElementById('taskInput').addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
@@ -361,9 +521,8 @@
       });
 
       // Инициализация при загрузке страницы
-      loadTasks();
-      restoreTimers();
-      renderTasks();
+      loadTasksOnInit();
+      updateFileStatus();
     </script>
   </body>
 </html>
