@@ -464,6 +464,32 @@
               const result = await response.json();
               fileSha = result.content.sha;
               showSaveStatus('✓ Сохранено');
+            } else if (response.status === 409) {
+              // Конфликт SHA - получаем свежий SHA и повторяем попытку
+              console.log('Конфликт SHA, получаем актуальный...');
+              fileSha = await getFileSha();
+              if (fileSha) {
+                body.sha = fileSha;
+                const retryResponse = await fetch(url, {
+                  method: 'PUT',
+                  headers: {
+                    ...githubApiHeaders(),
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(body),
+                });
+                if (retryResponse.ok) {
+                  const result = await retryResponse.json();
+                  fileSha = result.content.sha;
+                  showSaveStatus('✓ Сохранено (после обновления)');
+                } else {
+                  const error = await retryResponse.json().catch(() => ({}));
+                  const msg = error.message ? `: ${error.message}` : '';
+                  showSaveStatus(`✗ Ошибка после повтора (${retryResponse.status}${msg})`, true);
+                }
+              } else {
+                showSaveStatus('✗ Не удалось получить актуальный SHA', true);
+              }
             } else {
               const error = await response.json().catch(() => ({}));
               const msg = error.message ? `: ${error.message}` : '';
