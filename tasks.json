@@ -2,7 +2,7 @@
   {
     "id": 1767831917540,
     "name": "OBB",
-    "time": 11531,
+    "time": 37688,
     "isRunning": false,
     "subtimers": [],
     "paymentStatus": "unpaid"
@@ -22,7 +22,7 @@
       {
         "id": 1767832117050.5842,
         "name": "Фиксы",
-        "time": 3932,
+        "time": 4026,
         "isRunning": false
       }
     ],
