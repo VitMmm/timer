@@ -12,7 +12,14 @@
     "name": "Tyler",
     "time": 0,
     "isRunning": false,
-    "subtimers": [],
+    "subtimers": [
+      {
+        "id": 1767832111003.7258,
+        "name": "Доработка",
+        "time": 0,
+        "isRunning": false
+      }
+    ],
     "paymentStatus": "unpaid"
   }
 ]
