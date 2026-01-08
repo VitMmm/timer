@@ -18,6 +18,12 @@
         "name": "Доработка",
         "time": 0,
         "isRunning": false
+      },
+      {
+        "id": 1767832117050.5842,
+        "name": "Фиксы",
+        "time": 0,
+        "isRunning": false
       }
     ],
     "paymentStatus": "unpaid"
