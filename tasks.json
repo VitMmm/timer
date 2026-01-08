@@ -47,7 +47,7 @@
   {
     "id": 1767832301582,
     "name": "skiwelt",
-    "time": 0,
+    "time": 3600,
     "isRunning": false,
     "subtimers": [],
     "paymentStatus": "unpaid"
