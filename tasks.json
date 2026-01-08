@@ -11,6 +11,7 @@
         "time": 1,
         "isRunning": false
       }
-    ]
+    ],
+    "paymentStatus": "unpaid"
   }
 ]
