@@ -1,17 +1,1 @@
-[
-  {
-    "id": 1767826750436,
-    "name": "OBB",
-    "time": 48,
-    "isRunning": false,
-    "subtimers": [
-      {
-        "id": 1767826785148.6042,
-        "name": "Фиксы",
-        "time": 1,
-        "isRunning": false
-      }
-    ],
-    "paymentStatus": "unpaid"
-  }
-]
+[]
