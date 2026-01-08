@@ -35,5 +35,13 @@
     "isRunning": false,
     "subtimers": [],
     "paymentStatus": "unpaid"
+  },
+  {
+    "id": 1767832276141,
+    "name": "Dolomitisuperski фиксы",
+    "time": 0,
+    "isRunning": false,
+    "subtimers": [],
+    "paymentStatus": "unpaid"
   }
 ]
