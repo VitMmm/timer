@@ -51,5 +51,13 @@
     "isRunning": false,
     "subtimers": [],
     "paymentStatus": "unpaid"
+  },
+  {
+    "id": 1768222837493,
+    "name": "Скрипты динамических дат",
+    "time": 0,
+    "isRunning": false,
+    "subtimers": [],
+    "paymentStatus": "unpaid"
   }
 ]
