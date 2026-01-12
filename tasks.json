@@ -4,7 +4,14 @@
     "name": "OBB",
     "time": 97793,
     "isRunning": false,
-    "subtimers": [],
+    "subtimers": [
+      {
+        "id": 1768245097727.5837,
+        "name": "Доработка + фиксы",
+        "time": 0,
+        "isRunning": false
+      }
+    ],
     "paymentStatus": "unpaid"
   },
   {
