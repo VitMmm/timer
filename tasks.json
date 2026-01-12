@@ -73,6 +73,7 @@
     "time": 12,
     "isRunning": false,
     "subtimers": [],
-    "paymentStatus": "unpaid"
+    "paymentStatus": "paid",
+    "datePaid": "2026-01-12T19:41:30.903Z"
   }
 ]
