@@ -66,13 +66,5 @@
     "isRunning": false,
     "subtimers": [],
     "paymentStatus": "unpaid"
-  },
-  {
-    "id": 1768246879556,
-    "name": "тестовый таймер",
-    "time": 12,
-    "isRunning": false,
-    "subtimers": [],
-    "paymentStatus": "unpaid"
   }
 ]
