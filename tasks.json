@@ -70,7 +70,7 @@
   {
     "id": 1768246879556,
     "name": "тестовый таймер",
-    "time": 0,
+    "time": 12,
     "isRunning": false,
     "subtimers": [],
     "paymentStatus": "unpaid"
