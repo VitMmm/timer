@@ -135,6 +135,7 @@
         display: flex;
         flex-direction: column;
         gap: 15px;
+        margin-bottom: 30px;
       }
 
       .task-item {
@@ -318,6 +319,66 @@
         background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
       }
 
+      .archive-block {
+        background: white;
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        margin-bottom: 30px;
+      }
+
+      .archive-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+        border-top: 2px solid #f0f0f0;
+        padding-top: 15px;
+      }
+
+      .archive-title {
+        font-size: 24px;
+        font-weight: 700;
+        color: #333;
+      }
+
+      .archive-toggle-btn {
+        background: #667eea;
+        padding: 10px 20px;
+        font-size: 14px;
+      }
+
+      .archive-toggle-btn:hover {
+        background: #5568d3;
+      }
+
+      .archive-list {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .btn-archive {
+        background: #ed8936;
+        padding: 8px 15px;
+        font-size: 14px;
+      }
+
+      .btn-archive:hover {
+        background: #dd6b20;
+      }
+
+      .btn-unarchive {
+        background: #4299e1;
+        padding: 8px 15px;
+        font-size: 14px;
+      }
+
+      .btn-unarchive:hover {
+        background: #3182ce;
+      }
+
       .payment-rate {
         display: flex;
         align-items: center;
@@ -374,6 +435,10 @@
         gap: 15px;
       }
 
+      #timerPaymentsList .additional-payment-item {
+        gap: 0;
+      }
+
       .additional-payment-info {
         flex: 1;
         display: flex;
@@ -389,7 +454,7 @@
 
       .additional-payment-date {
         font-size: 12px;
-        color: #999;
+        color: #38a169;
       }
 
       .additional-payment-amount {
@@ -808,6 +873,18 @@
       <div class="tasks-list" id="tasksList">
         <div class="empty-state">Пока нет задач. Добавьте первую задачу!</div>
       </div>
+
+      <div class="archive-block">
+        <div class="archive-header">
+          <div class="archive-title">📦 Архив задач</div>
+          <button id="toggleArchiveBtn" class="archive-toggle-btn" onclick="toggleArchive()">Показать архив</button>
+        </div>
+        <div id="archiveContent" style="display: none">
+          <div class="archive-list" id="archiveList">
+            <div style="text-align: center; color: #999; padding: 20px">Архив пуст</div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Модальное окно для ввода текста -->
@@ -842,6 +919,7 @@
     <script>
       // Хранилище задач
       let tasks = [];
+      let archivedTasks = []; // Архивированные задачи
       let timers = {}; // Объект для хранения интервалов таймеров
       let githubConfig = null; // Конфигурация GitHub API
       let fileSha = null; // SHA текущего файла для обновления
@@ -851,6 +929,7 @@
       let additionalPayments = []; // Дополнительные платежи
       let timerPaymentFilter = 'all'; // Фильтр для платежей по таймерам: 'all', 'paid', 'unpaid'
       let additionalPaymentFilter = 'all'; // Фильтр для дополнительных платежей: 'all', 'paid', 'unpaid'
+      let archiveVisible = false; // Состояние видимости архива
 
       // Автоматическое определение owner и repo из URL
       function detectGitHubInfo() {
@@ -897,6 +976,7 @@
         // Сохраняем ставку и дополнительные платежи
         localStorage.setItem('ratePerHour', ratePerHour.toString());
         localStorage.setItem('additionalPayments', JSON.stringify(additionalPayments));
+        localStorage.setItem('archivedTasks', JSON.stringify(archivedTasks));
       }
 
       // Загрузка настроек оплаты из localStorage
@@ -909,6 +989,10 @@
         const savedPayments = localStorage.getItem('additionalPayments');
         if (savedPayments) {
           additionalPayments = JSON.parse(savedPayments);
+        }
+        const savedArchived = localStorage.getItem('archivedTasks');
+        if (savedArchived) {
+          archivedTasks = JSON.parse(savedArchived);
         }
       }
 
@@ -956,10 +1040,24 @@
       // Получить общее время задачи (включая подтаймеры)
       function getTotalTaskTime(task) {
         let totalTime = task.time || 0;
+        
+        // Добавляем время с текущего запуска основного таймера, если он работает
+        if (task.isRunning && task.startTime) {
+          const elapsed = Math.floor((Date.now() - task.startTime) / 1000);
+          totalTime += elapsed;
+        }
 
         if (task.subtimers && task.subtimers.length > 0) {
           task.subtimers.forEach((subtimer) => {
-            totalTime += subtimer.time || 0;
+            let subtimerTime = subtimer.time || 0;
+            
+            // Добавляем время с текущего запуска подтаймера, если он работает
+            if (subtimer.isRunning && subtimer.startTime) {
+              const elapsed = Math.floor((Date.now() - subtimer.startTime) / 1000);
+              subtimerTime += elapsed;
+            }
+            
+            totalTime += subtimerTime;
           });
         }
 
@@ -1128,6 +1226,161 @@
         renderMonthlyStats();
       }
 
+      // Переместить задачу в архив
+      async function archiveTask(taskId) {
+        const task = tasks.find((t) => t.id === taskId);
+        if (!task) return;
+
+        // Проверяем, что задача оплачена
+        if (task.paymentStatus !== 'paid') {
+          showToast('Можно архивировать только оплаченные задачи', 'error');
+          return;
+        }
+
+        const confirmed = await showConfirmModal('Переместить эту задачу в архив?');
+        if (!confirmed) return;
+
+        // Останавливаем все таймеры задачи
+        if (timers[taskId]) {
+          clearInterval(timers[taskId]);
+          delete timers[taskId];
+        }
+        if (task.subtimers) {
+          task.subtimers.forEach((subtimer) => {
+            const timerKey = `${taskId}_${subtimer.id}`;
+            if (timers[timerKey]) {
+              clearInterval(timers[timerKey]);
+              delete timers[timerKey];
+            }
+          });
+        }
+
+        // Добавляем метку архивирования
+        task.archivedAt = new Date().toISOString();
+
+        // Перемещаем в архив
+        archivedTasks.push(task);
+        tasks = tasks.filter((t) => t.id !== taskId);
+
+        saveSettings();
+        await autoSaveTasks();
+        renderTasks();
+        renderTimerPayments();
+        renderArchive();
+        updatePaymentStats();
+        showToast('Задача перемещена в архив', 'success');
+      }
+
+      // Восстановить задачу из архива
+      async function unarchiveTask(taskId) {
+        const taskIndex = archivedTasks.findIndex((t) => t.id === taskId);
+        if (taskIndex === -1) return;
+
+        const confirmed = await showConfirmModal('Восстановить эту задачу из архива?');
+        if (!confirmed) return;
+
+        const task = archivedTasks[taskIndex];
+
+        // Удаляем метку архивирования
+        delete task.archivedAt;
+
+        // Перемещаем обратно в активные задачи
+        tasks.push(task);
+        archivedTasks.splice(taskIndex, 1);
+
+        saveSettings();
+        await autoSaveTasks();
+        renderTasks();
+        renderTimerPayments();
+        renderArchive();
+        updatePaymentStats();
+        showToast('Задача восстановлена из архива', 'success');
+      }
+
+      // Переключить видимость архива
+      function toggleArchive() {
+        archiveVisible = !archiveVisible;
+        const archiveContent = document.getElementById('archiveContent');
+        const toggleBtn = document.getElementById('toggleArchiveBtn');
+
+        if (archiveVisible) {
+          archiveContent.style.display = 'block';
+          toggleBtn.textContent = 'Скрыть архив';
+          renderArchive();
+        } else {
+          archiveContent.style.display = 'none';
+          toggleBtn.textContent = 'Показать архив';
+        }
+      }
+
+      // Отрисовка архива
+      function renderArchive() {
+        const archiveList = document.getElementById('archiveList');
+
+        if (archivedTasks.length === 0) {
+          archiveList.innerHTML = '<div style="text-align: center; color: #999; padding: 20px">Архив пуст</div>';
+          return;
+        }
+
+        archiveList.innerHTML = archivedTasks
+          .map((task) => {
+            const totalTime = getTotalTaskTime(task);
+            const taskCost = calculateTaskCost(task);
+            const archivedDate = task.archivedAt
+              ? new Date(task.archivedAt).toLocaleDateString('ru-RU', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                })
+              : 'Не указана';
+
+            const subtimersHtml =
+              task.subtimers && task.subtimers.length > 0
+                ? `
+              <div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid #e0e0e0">
+                <div style="font-size: 14px; font-weight: 600; color: #666; margin-bottom: 8px">Подтаймеры:</div>
+                ${task.subtimers
+                  .map(
+                    (subtimer) => `
+                  <div style="font-size: 13px; color: #666; margin-top: 5px; padding-left: 10px; border-left: 2px solid #764ba2">
+                    <strong>${escapeHtml(subtimer.name)}:</strong> ${formatTime(subtimer.time)}
+                  </div>
+                `,
+                  )
+                  .join('')}
+              </div>
+            `
+                : '';
+
+            return `
+              <div class="task-item" style="background: #f8f9fa">
+                <div class="task-header">
+                  <div class="task-main-info">
+                    <div class="task-name" style="display: flex; align-items: center; gap: 10px">
+                      ${escapeHtml(task.name)}
+                      <span class="task-paid-badge paid">✓ Оплачено</span>
+                    </div>
+                    <div style="font-size: 12px; color: #999; margin-top: 5px">
+                      Архивировано: ${archivedDate}
+                    </div>
+                    <div style="display: flex; gap: 20px; align-items: center; margin-top: 8px">
+                      <div class="task-time" style="font-size: 20px">${formatTime(totalTime)}</div>
+                      <div style="font-size: 16px; color: #48bb78; font-weight: 600">${taskCost.toFixed(1)} USDT</div>
+                    </div>
+                  </div>
+                  <div class="task-actions">
+                    <button class="btn-unarchive" onclick="unarchiveTask(${task.id})">
+                      ↩️ Восстановить
+                    </button>
+                  </div>
+                </div>
+                ${subtimersHtml}
+              </div>
+            `;
+          })
+          .join('');
+      }
+
       // Отрисовка платежей по таймерам
       function renderTimerPayments() {
         const list = document.getElementById('timerPaymentsList');
@@ -1184,7 +1437,7 @@
 
             return `
           <div class="additional-payment-item" style="flex-direction: column; align-items: flex-start">
-            <div style="display: flex; width: 100%; align-items: center; justify-content: space-between; margin-bottom: 10px">
+            <div style="display: flex; width: 100%; align-items: center; justify-content: space-between;">
               <div class="additional-payment-info" style="flex: 1">
                 <div class="additional-payment-name">${escapeHtml(payment.name)}</div>
                 <div class="additional-payment-date">Общее время: ${formatTime(payment.time)}</div>
@@ -1197,6 +1450,17 @@
                 >
                   ${isPaid ? '✓ Оплачено' : '✗ Не оплачено'}
                 </button>
+                ${
+                  isPaid
+                    ? `<button 
+                    class="btn-archive" 
+                    onclick="archiveTask(${payment.id})"
+                    title="Переместить в архив"
+                  >
+                    📦 В архив
+                  </button>`
+                    : ''
+                }
               </div>
             </div>
             ${timeDetails ? `<div style="width: 100%; margin-top: 10px; padding-top: 10px; border-top: 1px solid #e0e0e0">${timeDetails}</div>` : ''}
@@ -1540,6 +1804,7 @@
             restoreTimers();
             renderAdditionalPayments();
             renderTimerPayments();
+            renderArchive();
             updatePaymentStats();
             renderMonthlyStats();
             console.log('Задачи загружены из GitHub:', tasks.length);
@@ -1583,6 +1848,7 @@
               restoreTimers();
               renderAdditionalPayments();
               renderTimerPayments();
+              renderArchive();
               updatePaymentStats();
               renderMonthlyStats();
               // Получаем SHA файла для будущих обновлений
@@ -1643,6 +1909,7 @@
         await loadTasksOnInit();
         renderAdditionalPayments();
         renderTimerPayments();
+        renderArchive();
         updatePaymentStats();
         renderMonthlyStats();
       }
@@ -1688,19 +1955,25 @@
         if (!task) return;
 
         if (task.isRunning) {
-          // Остановка таймера
+          // Остановка таймера - вычисляем прошедшее время и добавляем к общему
           task.isRunning = false;
+          if (task.startTime) {
+            const elapsed = Math.floor((Date.now() - task.startTime) / 1000);
+            task.time += elapsed;
+            delete task.startTime; // Удаляем временную метку
+          }
           if (timers[taskId]) {
             clearInterval(timers[taskId]);
             delete timers[taskId];
           }
         } else {
-          // Запуск таймера
+          // Запуск таймера - сохраняем временную метку старта
           task.isRunning = true;
-          timers[taskId] = setInterval(async () => {
-            task.time++;
+          task.startTime = Date.now(); // Запоминаем время старта
+          
+          // setInterval используется только для обновления UI
+          timers[taskId] = setInterval(() => {
             updateTaskTime(taskId);
-            await autoSaveTasks();
           }, 1000);
         }
 
@@ -1935,7 +2208,14 @@
         const task = tasks.find((t) => t.id === taskId);
         if (!task) return;
 
-        const input = await showTimeEditModal(`Изменить время для "${task.name}"`, task.time);
+        // Вычисляем текущее время с учетом работающего таймера
+        let currentTime = task.time;
+        if (task.isRunning && task.startTime) {
+          const elapsed = Math.floor((Date.now() - task.startTime) / 1000);
+          currentTime = task.time + elapsed;
+        }
+
+        const input = await showTimeEditModal(`Изменить время для "${task.name}"`, currentTime);
 
         if (input === null) return; // Пользователь отменил
 
@@ -1950,6 +2230,7 @@
           clearInterval(timers[taskId]);
           delete timers[taskId];
           task.isRunning = false;
+          delete task.startTime; // Удаляем временную метку
         }
 
         task.time = newTime;
@@ -1968,7 +2249,14 @@
         const subtimer = task.subtimers.find((st) => st.id === subtimerId);
         if (!subtimer) return;
 
-        const input = await showTimeEditModal(`Изменить время для "${subtimer.name}"`, subtimer.time);
+        // Вычисляем текущее время с учетом работающего подтаймера
+        let currentTime = subtimer.time;
+        if (subtimer.isRunning && subtimer.startTime) {
+          const elapsed = Math.floor((Date.now() - subtimer.startTime) / 1000);
+          currentTime = subtimer.time + elapsed;
+        }
+
+        const input = await showTimeEditModal(`Изменить время для "${subtimer.name}"`, currentTime);
 
         if (input === null) return; // Пользователь отменил
 
@@ -1984,6 +2272,7 @@
           clearInterval(timers[timerKey]);
           delete timers[timerKey];
           subtimer.isRunning = false;
+          delete subtimer.startTime; // Удаляем временную метку
         }
 
         subtimer.time = newTime;
@@ -1999,9 +2288,16 @@
         const task = tasks.find((t) => t.id === taskId);
         if (!task) return;
 
+        // Вычисляем текущее время с учетом работающего таймера
+        let currentTime = task.time;
+        if (task.isRunning && task.startTime) {
+          const elapsed = Math.floor((Date.now() - task.startTime) / 1000);
+          currentTime = task.time + elapsed;
+        }
+
         const taskElement = document.querySelector(`[data-task-id="${taskId}"] .task-time`);
         if (taskElement) {
-          taskElement.textContent = formatTime(task.time);
+          taskElement.textContent = formatTime(currentTime);
         }
         // Обновляем блок платежей по таймерам
         renderTimerPayments();
@@ -2077,19 +2373,25 @@
         const timerKey = `${taskId}_${subtimerId}`;
 
         if (subtimer.isRunning) {
-          // Остановка подтаймера
+          // Остановка подтаймера - вычисляем прошедшее время и добавляем к общему
           subtimer.isRunning = false;
+          if (subtimer.startTime) {
+            const elapsed = Math.floor((Date.now() - subtimer.startTime) / 1000);
+            subtimer.time += elapsed;
+            delete subtimer.startTime; // Удаляем временную метку
+          }
           if (timers[timerKey]) {
             clearInterval(timers[timerKey]);
             delete timers[timerKey];
           }
         } else {
-          // Запуск подтаймера
+          // Запуск подтаймера - сохраняем временную метку старта
           subtimer.isRunning = true;
-          timers[timerKey] = setInterval(async () => {
-            subtimer.time++;
+          subtimer.startTime = Date.now(); // Запоминаем время старта
+          
+          // setInterval используется только для обновления UI
+          timers[timerKey] = setInterval(() => {
             updateSubtimerTime(taskId, subtimerId);
-            await autoSaveTasks();
           }, 1000);
         }
 
@@ -2107,9 +2409,16 @@
         const subtimer = task.subtimers.find((st) => st.id === subtimerId);
         if (!subtimer) return;
 
+        // Вычисляем текущее время с учетом работающего подтаймера
+        let currentTime = subtimer.time;
+        if (subtimer.isRunning && subtimer.startTime) {
+          const elapsed = Math.floor((Date.now() - subtimer.startTime) / 1000);
+          currentTime = subtimer.time + elapsed;
+        }
+
         const subtimerElement = document.querySelector(`[data-task-id="${taskId}"] [data-subtimer-id="${subtimerId}"] .subtimer-time`);
         if (subtimerElement) {
-          subtimerElement.textContent = formatTime(subtimer.time);
+          subtimerElement.textContent = formatTime(currentTime);
         }
         // Обновляем блок платежей по таймерам при изменении времени подтаймера
         renderTimerPayments();
@@ -2252,15 +2561,31 @@
       // Восстановление таймеров при загрузке страницы
       function restoreTimers() {
         tasks.forEach((task) => {
-          // Останавливаем основной таймер
-          if (task.isRunning) {
-            task.isRunning = false;
+          // Восстанавливаем основной таймер с учетом прошедшего времени
+          if (task.isRunning && task.startTime) {
+            const elapsed = Math.floor((Date.now() - task.startTime) / 1000);
+            task.time += elapsed;
+            task.startTime = Date.now(); // Обновляем временную метку
+            
+            // Перезапускаем таймер для обновления UI
+            timers[task.id] = setInterval(() => {
+              updateTaskTime(task.id);
+            }, 1000);
           }
-          // Останавливаем все подтаймеры
+          
+          // Восстанавливаем все подтаймеры с учетом прошедшего времени
           if (task.subtimers) {
             task.subtimers.forEach((subtimer) => {
-              if (subtimer.isRunning) {
-                subtimer.isRunning = false;
+              if (subtimer.isRunning && subtimer.startTime) {
+                const elapsed = Math.floor((Date.now() - subtimer.startTime) / 1000);
+                subtimer.time += elapsed;
+                subtimer.startTime = Date.now(); // Обновляем временную метку
+                
+                // Перезапускаем подтаймер для обновления UI
+                const timerKey = `${task.id}_${subtimer.id}`;
+                timers[timerKey] = setInterval(() => {
+                  updateSubtimerTime(task.id, subtimer.id);
+                }, 1000);
               }
             });
           }
@@ -2322,6 +2647,7 @@
       updateFileStatus();
       renderAdditionalPayments();
       renderTimerPayments();
+      renderArchive();
       updatePaymentStats();
       renderMonthlyStats();
     </script>
