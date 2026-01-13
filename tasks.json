@@ -35,9 +35,8 @@
       {
         "id": 1768320944018.6104,
         "name": "Фикс гифки",
-        "time": 29,
-        "isRunning": true,
-        "startTime": 1768320984493
+        "time": 4458,
+        "isRunning": false
       }
     ],
     "paymentStatus": "unpaid"
