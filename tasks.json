@@ -9,7 +9,8 @@
         "id": 1768245097727.5837,
         "name": "Доработка + фиксы",
         "time": 5292,
-        "isRunning": false
+        "isRunning": true,
+        "startTime": 1768331665093
       }
     ],
     "paymentStatus": "unpaid"
