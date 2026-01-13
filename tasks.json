@@ -8,9 +8,8 @@
       {
         "id": 1768245097727.5837,
         "name": "Доработка + фиксы",
-        "time": 5239,
-        "isRunning": true,
-        "startTime": 1768326262221
+        "time": 5292,
+        "isRunning": false
       }
     ],
     "paymentStatus": "unpaid"
