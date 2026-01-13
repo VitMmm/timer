@@ -31,6 +31,12 @@
         "name": "Фиксы",
         "time": 4026,
         "isRunning": false
+      },
+      {
+        "id": 1768320944018.6104,
+        "name": "Фикс гифки",
+        "time": 0,
+        "isRunning": false
       }
     ],
     "paymentStatus": "unpaid"
