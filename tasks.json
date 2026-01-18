@@ -76,10 +76,9 @@
   {
     "id": 1768729181025,
     "name": "Ленды с быком",
-    "time": 0,
-    "isRunning": true,
+    "time": 526,
+    "isRunning": false,
     "subtimers": [],
-    "paymentStatus": "unpaid",
-    "startTime": 1768729183908
+    "paymentStatus": "unpaid"
   }
 ]
