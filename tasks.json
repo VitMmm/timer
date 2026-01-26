@@ -74,5 +74,13 @@
     "isRunning": false,
     "subtimers": [],
     "paymentStatus": "unpaid"
+  },
+  {
+    "id": 1769420999560,
+    "name": "Dolomiti superski",
+    "time": 0,
+    "isRunning": false,
+    "subtimers": [],
+    "paymentStatus": "unpaid"
   }
 ]
