@@ -6,12 +6,6 @@
     "isRunning": false,
     "subtimers": [
       {
-        "id": 1768245097727.5837,
-        "name": "Доработка + фиксы",
-        "time": 10768,
-        "isRunning": false
-      },
-      {
         "id": 1769420759844.166,
         "name": "Доработка",
         "time": 3600,
