@@ -1,20 +1,5 @@
 [
   {
-    "id": 1767831917540,
-    "name": "OBB",
-    "time": 97793,
-    "isRunning": false,
-    "subtimers": [
-      {
-        "id": 1769420759844.166,
-        "name": "Доработка",
-        "time": 3600,
-        "isRunning": false
-      }
-    ],
-    "paymentStatus": "unpaid"
-  },
-  {
     "id": 1767832095483,
     "name": "Tyler",
     "time": 24513,
