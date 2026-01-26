@@ -718,6 +718,222 @@
         opacity: 0.9;
       }
 
+      .categories-filter {
+        background: white;
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+      }
+
+      .categories-filter-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 15px;
+      }
+
+      .categories-filter-title {
+        font-size: 18px;
+        font-weight: 600;
+        color: #333;
+      }
+
+      .categories-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 15px;
+      }
+
+      .category-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 12px;
+        background: #f0f0f0;
+        border: 2px solid #e0e0e0;
+        border-radius: 20px;
+        font-size: 14px;
+        color: #666;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+
+      .category-tag:hover {
+        background: #e0e0e0;
+        border-color: #667eea;
+      }
+
+      .category-tag.active {
+        background: #667eea;
+        color: white;
+        border-color: #667eea;
+        font-weight: 600;
+      }
+
+      .category-tag-remove {
+        background: rgba(0, 0, 0, 0.1);
+        border-radius: 50%;
+        width: 18px;
+        height: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+
+      .category-tag-remove:hover {
+        background: rgba(0, 0, 0, 0.2);
+      }
+
+      .category-tag.active .category-tag-remove {
+        background: rgba(255, 255, 255, 0.3);
+      }
+
+      .category-tag.active .category-tag-remove:hover {
+        background: rgba(255, 255, 255, 0.5);
+      }
+
+      .add-category-input {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+
+      .add-category-input input {
+        flex: 1;
+        padding: 8px 12px;
+        border: 2px solid #e0e0e0;
+        border-radius: 8px;
+        font-size: 14px;
+      }
+
+      .add-category-input input:focus {
+        outline: none;
+        border-color: #667eea;
+      }
+
+      .add-category-btn {
+        padding: 8px 15px;
+        font-size: 14px;
+      }
+
+      .task-categories {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 8px;
+      }
+
+      .task-category-badge {
+        display: inline-block;
+        padding: 4px 10px;
+        background: #667eea;
+        color: white;
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: 500;
+      }
+
+      .btn-edit-categories {
+        padding: 6px 12px;
+        font-size: 12px;
+        background: #667eea;
+        margin-top: 5px;
+      }
+
+      .btn-edit-categories:hover {
+        background: #5568d3;
+      }
+
+      .categories-select-modal {
+        max-height: 300px;
+        overflow-y: auto;
+        margin-bottom: 15px;
+        padding: 10px;
+        border: 2px solid #e0e0e0;
+        border-radius: 8px;
+      }
+
+      .category-checkbox-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+
+      .category-checkbox-item:hover {
+        background: #f0f0f0;
+      }
+
+      .category-checkbox-item input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+        cursor: pointer;
+      }
+
+      .category-checkbox-item label {
+        flex: 1;
+        cursor: pointer;
+        font-size: 14px;
+        color: #333;
+      }
+
+      .category-stat-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px;
+        background: white;
+        border-radius: 8px;
+        margin-bottom: 8px;
+        border-left: 4px solid #667eea;
+      }
+
+      .category-stat-info {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .category-stat-name {
+        font-size: 16px;
+        font-weight: 600;
+        color: #333;
+      }
+
+      .category-stat-details {
+        font-size: 13px;
+        color: #666;
+        display: flex;
+        gap: 15px;
+      }
+
+      .category-stat-time {
+        font-size: 20px;
+        font-weight: 700;
+        color: #667eea;
+        font-variant-numeric: tabular-nums;
+        min-width: 90px;
+        text-align: right;
+      }
+
+      .category-stat-amount {
+        font-size: 16px;
+        font-weight: 600;
+        color: #48bb78;
+        font-variant-numeric: tabular-nums;
+        min-width: 100px;
+        text-align: right;
+      }
+
       @media (max-width: 600px) {
         .task-header {
           flex-direction: column;
@@ -839,6 +1055,23 @@
               <button id="filterTimerUnpaid" class="btn-add-subtimer filter-btn" onclick="setTimerPaymentFilter('unpaid')" style="padding: 6px 12px; font-size: 12px">Не оплачено</button>
             </div>
           </div>
+          <div class="categories-filter" style="margin-top: 15px; margin-bottom: 15px">
+            <div class="categories-filter-header">
+              <div class="categories-filter-title">🏷️ Фильтр по категориям</div>
+              <button class="btn-add-subtimer" onclick="clearCategoryFilter()" style="padding: 6px 12px; font-size: 12px">Сбросить фильтр</button>
+            </div>
+            <div class="categories-list" id="categoriesList">
+              <div style="color: #999; font-size: 14px">Нет категорий. Добавьте категорию или создайте задачу с категориями.</div>
+            </div>
+            <div class="add-category-input">
+              <input type="text" id="newCategoryInput" placeholder="Введите название категории..." />
+              <button class="add-category-btn" onclick="addCategory()">+ Добавить категорию</button>
+            </div>
+          </div>
+          <div class="categories-stats" style="margin-top: 15px; margin-bottom: 15px; padding: 15px; background: #f8f9fa; border-radius: 8px">
+            <div style="font-size: 16px; font-weight: 600; color: #333; margin-bottom: 15px">📊 Статистика по категориям</div>
+            <div id="categoriesStatsList"></div>
+          </div>
           <div class="additional-payments-list" id="timerPaymentsList"></div>
         </div>
       </div>
@@ -913,6 +1146,22 @@
       </div>
     </div>
 
+    <!-- Модальное окно для выбора категорий -->
+    <div id="categoriesModal" class="modal-overlay" style="display: none">
+      <div class="modal-content">
+        <h2 class="modal-title" id="categoriesModalTitle">Выбрать категории</h2>
+        <div class="categories-select-modal" id="categoriesSelectList"></div>
+        <div class="add-category-input" style="margin-bottom: 15px">
+          <input type="text" id="newCategoryInModalInput" placeholder="Новая категория..." />
+          <button class="add-category-btn" onclick="addCategoryFromModal()">+ Добавить</button>
+        </div>
+        <div class="modal-buttons">
+          <button id="categoriesModalCancel" class="modal-button modal-button-secondary">Отмена</button>
+          <button id="categoriesModalOk" class="modal-button modal-button-primary">Сохранить</button>
+        </div>
+      </div>
+    </div>
+
     <!-- Контейнер для уведомлений -->
     <div id="toastContainer"></div>
 
@@ -930,6 +1179,8 @@
       let timerPaymentFilter = 'all'; // Фильтр для платежей по таймерам: 'all', 'paid', 'unpaid'
       let additionalPaymentFilter = 'all'; // Фильтр для дополнительных платежей: 'all', 'paid', 'unpaid'
       let archiveVisible = false; // Состояние видимости архива
+      let selectedCategories = []; // Выбранные категории для фильтрации (пустой массив = показать все)
+      let allCategories = []; // Все доступные категории
 
       // Автоматическое определение owner и repo из URL
       function detectGitHubInfo() {
@@ -977,6 +1228,7 @@
         localStorage.setItem('ratePerHour', ratePerHour.toString());
         localStorage.setItem('additionalPayments', JSON.stringify(additionalPayments));
         localStorage.setItem('archivedTasks', JSON.stringify(archivedTasks));
+        localStorage.setItem('allCategories', JSON.stringify(allCategories));
       }
 
       // Загрузка настроек оплаты из localStorage
@@ -994,6 +1246,347 @@
         if (savedArchived) {
           archivedTasks = JSON.parse(savedArchived);
         }
+        const savedCategories = localStorage.getItem('allCategories');
+        if (savedCategories) {
+          allCategories = JSON.parse(savedCategories);
+        }
+      }
+
+      // Обновить список всех категорий из задач
+      function updateAllCategories() {
+        const categoriesSet = new Set();
+        tasks.forEach((task) => {
+          if (task.categories && Array.isArray(task.categories)) {
+            task.categories.forEach((cat) => {
+              if (cat && cat.trim()) {
+                categoriesSet.add(cat.trim());
+              }
+            });
+          }
+        });
+        archivedTasks.forEach((task) => {
+          if (task.categories && Array.isArray(task.categories)) {
+            task.categories.forEach((cat) => {
+              if (cat && cat.trim()) {
+                categoriesSet.add(cat.trim());
+              }
+            });
+          }
+        });
+        // Добавляем категории из сохраненного списка
+        allCategories.forEach((cat) => {
+          if (cat && cat.trim()) {
+            categoriesSet.add(cat.trim());
+          }
+        });
+        allCategories = Array.from(categoriesSet).sort();
+        saveSettings();
+      }
+
+      // Добавить новую категорию
+      function addCategory() {
+        const input = document.getElementById('newCategoryInput');
+        const categoryName = input.value.trim();
+        if (!categoryName) {
+          showToast('Введите название категории', 'error');
+          return;
+        }
+        if (allCategories.includes(categoryName)) {
+          showToast('Эта категория уже существует', 'error');
+          return;
+        }
+        allCategories.push(categoryName);
+        allCategories.sort();
+        input.value = '';
+        saveSettings();
+        renderCategoriesFilter();
+        renderCategoriesStats();
+      }
+
+      // Добавить категорию из модального окна
+      function addCategoryFromModal() {
+        const input = document.getElementById('newCategoryInModalInput');
+        const categoryName = input.value.trim();
+        if (!categoryName) {
+          showToast('Введите название категории', 'error');
+          return;
+        }
+        if (allCategories.includes(categoryName)) {
+          showToast('Эта категория уже существует', 'error');
+          return;
+        }
+        allCategories.push(categoryName);
+        allCategories.sort();
+        input.value = '';
+        saveSettings();
+        renderCategoriesFilter();
+        renderCategoriesStats();
+        // Обновляем модальное окно выбора категорий
+        const modal = document.getElementById('categoriesModal');
+        if (modal.style.display === 'flex') {
+          const currentTaskId = modal.dataset.taskId;
+          const task = currentTaskId ? tasks.find((t) => t.id === parseInt(currentTaskId)) : null;
+          renderCategoriesSelectModal(task ? task.categories || [] : []);
+        }
+      }
+
+      // Отрисовка фильтра категорий
+      function renderCategoriesFilter() {
+        const list = document.getElementById('categoriesList');
+        if (allCategories.length === 0) {
+          list.innerHTML = '<div style="color: #999; font-size: 14px">Нет категорий. Добавьте категорию или создайте задачу с категориями.</div>';
+          renderCategoriesStats();
+          return;
+        }
+        list.innerHTML = allCategories
+          .map(
+            (category, index) => {
+              const escapedCategory = escapeHtml(category);
+              return `
+          <div class="category-tag ${selectedCategories.includes(category) ? 'active' : ''}" data-category-index="${index}" onclick="toggleCategoryFilterByIndex(${index})">
+            ${escapedCategory}
+            ${selectedCategories.includes(category) ? `<span class="category-tag-remove" onclick="event.stopPropagation(); removeCategoryFilterByIndex(${index})">×</span>` : ''}
+          </div>
+        `;
+            }
+          )
+          .join('');
+        renderCategoriesStats();
+      }
+
+      // Отрисовка статистики по категориям
+      function renderCategoriesStats() {
+        const statsList = document.getElementById('categoriesStatsList');
+        if (!statsList) return;
+
+        if (allCategories.length === 0) {
+          statsList.innerHTML = '<div style="text-align: center; color: #999; padding: 10px">Нет категорий для отображения статистики</div>';
+          return;
+        }
+
+        // Собираем статистику по категориям
+        const categoryStats = {};
+        
+        allCategories.forEach((category) => {
+          categoryStats[category] = {
+            totalTime: 0,
+            taskCount: 0,
+            totalAmount: 0,
+          };
+        });
+
+        // Проходим по всем задачам и суммируем время и стоимость по категориям
+        tasks.forEach((task) => {
+          if (!task.categories || task.categories.length === 0) return;
+          
+          const taskTime = getTotalTaskTime(task);
+          const taskCost = calculateTaskCost(task);
+          
+          task.categories.forEach((category) => {
+            if (categoryStats[category]) {
+              categoryStats[category].totalTime += taskTime;
+              categoryStats[category].taskCount += 1;
+              categoryStats[category].totalAmount += taskCost;
+            }
+          });
+        });
+
+        // Сортируем по времени (от большего к меньшему)
+        const sortedStats = Object.entries(categoryStats)
+          .map(([category, stats]) => ({ category, ...stats }))
+          .sort((a, b) => b.totalTime - a.totalTime);
+
+        if (sortedStats.length === 0 || sortedStats.every((stat) => stat.totalTime === 0)) {
+          statsList.innerHTML = '<div style="text-align: center; color: #999; padding: 10px">Нет данных по категориям</div>';
+          return;
+        }
+
+        statsList.innerHTML = sortedStats
+          .map((stat) => {
+            if (stat.totalTime === 0) return '';
+            const escapedCategory = escapeHtml(stat.category);
+            return `
+          <div class="category-stat-item">
+            <div class="category-stat-info">
+              <div class="category-stat-name">${escapedCategory}</div>
+              <div class="category-stat-details">
+                <span>Задач: ${stat.taskCount}</span>
+                ${stat.totalAmount > 0 ? `<span>Стоимость: ${stat.totalAmount.toFixed(1)} USDT</span>` : ''}
+              </div>
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 4px">
+              <div class="category-stat-time">${formatTime(stat.totalTime)}</div>
+              ${stat.totalAmount > 0 ? `<div class="category-stat-amount">${stat.totalAmount.toFixed(1)} USDT</div>` : ''}
+            </div>
+          </div>
+        `;
+          })
+          .filter((html) => html !== '')
+          .join('');
+      }
+
+      // Переключить фильтр категории по индексу
+      function toggleCategoryFilterByIndex(index) {
+        if (index < 0 || index >= allCategories.length) return;
+        const category = allCategories[index];
+        toggleCategoryFilter(category);
+      }
+
+      // Переключить фильтр категории
+      function toggleCategoryFilter(category) {
+        const index = selectedCategories.indexOf(category);
+        if (index === -1) {
+          selectedCategories.push(category);
+        } else {
+          selectedCategories.splice(index, 1);
+        }
+        renderCategoriesFilter();
+        renderCategoriesStats();
+        renderTimerPayments();
+      }
+
+      // Удалить категорию из фильтра по индексу
+      function removeCategoryFilterByIndex(index) {
+        if (index < 0 || index >= allCategories.length) return;
+        const category = allCategories[index];
+        removeCategoryFilter(category);
+      }
+
+      // Удалить категорию из фильтра
+      function removeCategoryFilter(category) {
+        const index = selectedCategories.indexOf(category);
+        if (index !== -1) {
+          selectedCategories.splice(index, 1);
+        }
+        renderCategoriesFilter();
+        renderCategoriesStats();
+        renderTimerPayments();
+      }
+
+      // Сбросить фильтр категорий
+      function clearCategoryFilter() {
+        selectedCategories = [];
+        renderCategoriesFilter();
+        renderCategoriesStats();
+        renderTimerPayments();
+      }
+
+      // Показать модальное окно выбора категорий
+      function showCategoriesModal(currentCategories = [], title = 'Выбрать категории') {
+        return new Promise((resolve) => {
+          const modal = document.getElementById('categoriesModal');
+          const titleEl = document.getElementById('categoriesModalTitle');
+          const okBtn = document.getElementById('categoriesModalOk');
+          const cancelBtn = document.getElementById('categoriesModalCancel');
+          const selectList = document.getElementById('categoriesSelectList');
+
+          titleEl.textContent = title;
+          modal.style.display = 'flex';
+          modal.dataset.selectedCategories = JSON.stringify(currentCategories);
+
+          renderCategoriesSelectModal(currentCategories);
+
+          const cleanup = () => {
+            modal.style.display = 'none';
+            delete modal.dataset.selectedCategories;
+            okBtn.onclick = null;
+            cancelBtn.onclick = null;
+            modal.onclick = null;
+          };
+
+          okBtn.onclick = () => {
+            const selected = JSON.parse(modal.dataset.selectedCategories || '[]');
+            cleanup();
+            resolve(selected);
+          };
+
+          cancelBtn.onclick = () => {
+            cleanup();
+            resolve(null);
+          };
+
+          modal.onclick = (e) => {
+            if (e.target === modal) {
+              cleanup();
+              resolve(null);
+            }
+          };
+        });
+      }
+
+      // Отрисовка списка категорий в модальном окне
+      function renderCategoriesSelectModal(selectedCategories = []) {
+        const list = document.getElementById('categoriesSelectList');
+        const modal = document.getElementById('categoriesModal');
+        let currentSelected = selectedCategories;
+        if (modal.dataset.selectedCategories) {
+          currentSelected = JSON.parse(modal.dataset.selectedCategories);
+        }
+
+        if (allCategories.length === 0) {
+          list.innerHTML = '<div style="text-align: center; color: #999; padding: 20px">Нет доступных категорий. Добавьте новую категорию.</div>';
+          return;
+        }
+
+        list.innerHTML = allCategories
+          .map(
+            (category, index) => {
+              const escapedCategory = escapeHtml(category);
+              const safeId = `cat_modal_${index}_${category.replace(/[^a-zA-Z0-9]/g, '_')}`;
+              return `
+          <div class="category-checkbox-item">
+            <input 
+              type="checkbox" 
+              id="${safeId}" 
+              data-category-index="${index}"
+              ${currentSelected.includes(category) ? 'checked' : ''}
+              onchange="updateCategoriesModalSelectionByIndex(${index}, this.checked)"
+            />
+            <label for="${safeId}">${escapedCategory}</label>
+          </div>
+        `;
+            }
+          )
+          .join('');
+      }
+
+      // Обновить выбор категорий в модальном окне по индексу
+      function updateCategoriesModalSelectionByIndex(index, isChecked) {
+        if (index < 0 || index >= allCategories.length) return;
+        const category = allCategories[index];
+        updateCategoriesModalSelection(category, isChecked);
+      }
+
+      // Обновить выбор категорий в модальном окне
+      function updateCategoriesModalSelection(category, isChecked) {
+        const modal = document.getElementById('categoriesModal');
+        let selected = JSON.parse(modal.dataset.selectedCategories || '[]');
+        if (isChecked) {
+          if (!selected.includes(category)) {
+            selected.push(category);
+          }
+        } else {
+          selected = selected.filter((cat) => cat !== category);
+        }
+        modal.dataset.selectedCategories = JSON.stringify(selected);
+      }
+
+      // Редактировать категории задачи
+      async function editTaskCategories(taskId) {
+        const task = tasks.find((t) => t.id === taskId);
+        if (!task) return;
+
+        const selectedCats = await showCategoriesModal(task.categories || [], `Категории для "${task.name}"`);
+        if (selectedCats === null) return; // Пользователь отменил
+
+        task.categories = selectedCats || [];
+        updateAllCategories();
+        await autoSaveTasks();
+        renderTasks();
+        renderCategoriesFilter();
+        renderCategoriesStats();
+        renderTimerPayments();
+        updatePaymentStats();
       }
 
       // Получение курса USDT/RUB
@@ -1186,6 +1779,7 @@
         document.getElementById('filterTimerUnpaid').classList.toggle('active', filter === 'unpaid');
 
         renderTimerPayments();
+        updatePaymentStats();
       }
 
       // Установить фильтр для дополнительных платежей
@@ -1392,6 +1986,7 @@
             amount: calculateTaskCost(task),
             time: getTotalTaskTime(task),
             status: task.paymentStatus || 'unpaid',
+            categories: task.categories || [],
           }))
           .filter((payment) => {
             // Фильтруем по сумме
@@ -1399,12 +1994,32 @@
             // Фильтруем по статусу оплаты
             if (timerPaymentFilter === 'paid' && payment.status !== 'paid') return false;
             if (timerPaymentFilter === 'unpaid' && payment.status !== 'unpaid') return false;
+            // Фильтруем по категориям
+            if (selectedCategories.length > 0) {
+              // Показываем платеж, если у задачи есть хотя бы одна из выбранных категорий
+              if (!payment.categories || payment.categories.length === 0) {
+                return false; // Если у задачи нет категорий, она не показывается при активном фильтре
+              }
+              const hasSelectedCategory = selectedCategories.some((selectedCat) => 
+                payment.categories.includes(selectedCat)
+              );
+              if (!hasSelectedCategory) return false;
+            }
             return true;
           });
 
         if (timerPayments.length === 0) {
-          const emptyMessage =
-            tasks.filter((t) => calculateTaskCost(t) > 0).length === 0 ? 'Нет данных по таймерам' : timerPaymentFilter === 'paid' ? 'Нет оплаченных платежей' : timerPaymentFilter === 'unpaid' ? 'Нет неоплаченных платежей' : 'Нет данных по таймерам';
+          let emptyMessage = 'Нет данных по таймерам';
+          const hasPayments = tasks.filter((t) => calculateTaskCost(t) > 0).length > 0;
+          if (hasPayments) {
+            if (selectedCategories.length > 0) {
+              emptyMessage = 'Нет платежей с выбранными категориями';
+            } else if (timerPaymentFilter === 'paid') {
+              emptyMessage = 'Нет оплаченных платежей';
+            } else if (timerPaymentFilter === 'unpaid') {
+              emptyMessage = 'Нет неоплаченных платежей';
+            }
+          }
           list.innerHTML = `<div style="text-align: center; color: #999; padding: 20px">${emptyMessage}</div>`;
           return;
         }
@@ -1791,6 +2406,9 @@
               if (!task.paymentStatus) {
                 task.paymentStatus = 'unpaid';
               }
+              if (!task.categories) {
+                task.categories = [];
+              }
               // Удаляем старые поля, если есть
               if (task.payments) {
                 delete task.payments;
@@ -1799,9 +2417,12 @@
                 delete task.status;
               }
             });
+            updateAllCategories();
             fileSha = data.sha;
+            updateAllCategories();
             renderTasks();
             restoreTimers();
+            renderCategoriesFilter();
             renderAdditionalPayments();
             renderTimerPayments();
             renderArchive();
@@ -1836,6 +2457,9 @@
                 if (!task.paymentStatus) {
                   task.paymentStatus = 'unpaid';
                 }
+                if (!task.categories) {
+                  task.categories = [];
+                }
                 // Удаляем старые поля, если есть
                 if (task.payments) {
                   delete task.payments;
@@ -1844,8 +2468,11 @@
                   delete task.status;
                 }
               });
+              updateAllCategories();
+              updateAllCategories();
               renderTasks();
               restoreTimers();
+              renderCategoriesFilter();
               renderAdditionalPayments();
               renderTimerPayments();
               renderArchive();
@@ -1907,6 +2534,9 @@
 
         // Загружаем данные из репозитория
         await loadTasksOnInit();
+        updateAllCategories();
+        renderCategoriesFilter();
+        renderCategoriesStats();
         renderAdditionalPayments();
         renderTimerPayments();
         renderArchive();
@@ -1932,6 +2562,10 @@
           return;
         }
 
+        // Показываем модальное окно для выбора категорий
+        const selectedCats = await showCategoriesModal([], 'Выберите категории для задачи');
+        if (selectedCats === null) return; // Пользователь отменил
+
         const newTask = {
           id: Date.now(),
           name: taskName,
@@ -1939,12 +2573,16 @@
           isRunning: false,
           subtimers: [],
           paymentStatus: 'unpaid',
+          categories: selectedCats || [],
         };
 
         tasks.push(newTask);
         input.value = '';
+        updateAllCategories();
         await autoSaveTasks();
         renderTasks();
+        renderCategoriesFilter();
+        renderCategoriesStats();
         renderTimerPayments();
         updatePaymentStats();
       }
@@ -2301,6 +2939,7 @@
         }
         // Обновляем блок платежей по таймерам
         renderTimerPayments();
+        renderCategoriesStats();
         updatePaymentStats();
       }
 
@@ -2422,6 +3061,7 @@
         }
         // Обновляем блок платежей по таймерам при изменении времени подтаймера
         renderTimerPayments();
+        renderCategoriesStats();
         updatePaymentStats();
       }
 
@@ -2516,11 +3156,20 @@
           </div>
         `;
 
+            const categoriesHtml = task.categories && task.categories.length > 0
+              ? `
+                <div class="task-categories">
+                  ${task.categories.map((cat) => `<span class="task-category-badge">${escapeHtml(cat)}</span>`).join('')}
+                </div>
+              `
+              : '';
+
             return `
           <div class="task-item" data-task-id="${task.id}">
             <div class="task-header">
               <div class="task-main-info">
                 <div class="task-name">${escapeHtml(task.name)}</div>
+                ${categoriesHtml}
                 <div style="display: flex; gap: 20px; align-items: center; margin-top: 5px">
                   <div class="task-time">${formatTime(task.time)}</div>
                   <button 
@@ -2529,6 +3178,12 @@
                     style="padding: 6px 12px; font-size: 12px"
                   >
                     ✏️ Изменить время
+                  </button>
+                  <button 
+                    class="btn-edit-categories" 
+                    onclick="editTaskCategories(${task.id})"
+                  >
+                    🏷️ Категории
                   </button>
                 </div>
               </div>
@@ -2620,6 +3275,18 @@
         }
       });
 
+      document.getElementById('newCategoryInput').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          addCategory();
+        }
+      });
+
+      document.getElementById('newCategoryInModalInput').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          addCategoryFromModal();
+        }
+      });
+
       // Обработчики событий для блока оплаты
       document.getElementById('saveRateBtn').addEventListener('click', () => {
         ratePerHour = parseInt(document.getElementById('ratePerHour').value) || 1000;
@@ -2645,6 +3312,9 @@
       fetchUSDTRate();
       loadTasksOnInit();
       updateFileStatus();
+      updateAllCategories();
+      renderCategoriesFilter();
+      renderCategoriesStats();
       renderAdditionalPayments();
       renderTimerPayments();
       renderArchive();
