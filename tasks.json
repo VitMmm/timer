@@ -18,7 +18,8 @@
         "isRunning": false
       }
     ],
-    "paymentStatus": "unpaid"
+    "paymentStatus": "unpaid",
+    "categories": []
   },
   {
     "id": 1767832229746,
@@ -26,7 +27,8 @@
     "time": 7066,
     "isRunning": false,
     "subtimers": [],
-    "paymentStatus": "unpaid"
+    "paymentStatus": "unpaid",
+    "categories": []
   },
   {
     "id": 1768222837493,
@@ -34,7 +36,8 @@
     "time": 1717,
     "isRunning": false,
     "subtimers": [],
-    "paymentStatus": "unpaid"
+    "paymentStatus": "unpaid",
+    "categories": []
   },
   {
     "id": 1768729181025,
@@ -42,7 +45,8 @@
     "time": 15004,
     "isRunning": false,
     "subtimers": [],
-    "paymentStatus": "unpaid"
+    "paymentStatus": "unpaid",
+    "categories": []
   },
   {
     "id": 1769420999560,
@@ -50,7 +54,8 @@
     "time": 7397,
     "isRunning": false,
     "subtimers": [],
-    "paymentStatus": "unpaid"
+    "paymentStatus": "unpaid",
+    "categories": []
   },
   {
     "id": 1769422662988,
@@ -65,7 +70,8 @@
         "isRunning": false
       }
     ],
-    "paymentStatus": "unpaid"
+    "paymentStatus": "unpaid",
+    "categories": []
   },
   {
     "id": 1769422717903,
@@ -73,6 +79,7 @@
     "time": 4297,
     "isRunning": false,
     "subtimers": [],
-    "paymentStatus": "unpaid"
+    "paymentStatus": "unpaid",
+    "categories": []
   }
 ]
