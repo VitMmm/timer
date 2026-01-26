@@ -80,7 +80,14 @@
     "name": "OBB",
     "time": 97793,
     "isRunning": false,
-    "subtimers": [],
+    "subtimers": [
+      {
+        "id": 1769422681440.168,
+        "name": "Доработка",
+        "time": 0,
+        "isRunning": false
+      }
+    ],
     "paymentStatus": "unpaid"
   }
 ]
