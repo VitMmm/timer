@@ -92,6 +92,8 @@
     "isRunning": false,
     "subtimers": [],
     "paymentStatus": "unpaid",
-    "categories": []
+    "categories": [
+      "АРБ"
+    ]
   }
 ]
