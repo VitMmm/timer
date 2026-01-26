@@ -81,7 +81,9 @@
       }
     ],
     "paymentStatus": "unpaid",
-    "categories": []
+    "categories": [
+      "АРБ"
+    ]
   },
   {
     "id": 1769422717903,
