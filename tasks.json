@@ -29,14 +29,6 @@
     "paymentStatus": "unpaid"
   },
   {
-    "id": 1767832301582,
-    "name": "skiwelt",
-    "time": 4297,
-    "isRunning": false,
-    "subtimers": [],
-    "paymentStatus": "unpaid"
-  },
-  {
     "id": 1768222837493,
     "name": "Скрипты динамических дат",
     "time": 1717,
