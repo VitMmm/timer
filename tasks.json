@@ -31,6 +31,12 @@
         "name": "Фикс гифки",
         "time": 4458,
         "isRunning": false
+      },
+      {
+        "id": 1769420881811.03,
+        "name": "Доработка гифки",
+        "time": 0,
+        "isRunning": false
       }
     ],
     "paymentStatus": "unpaid"
