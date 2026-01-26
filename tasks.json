@@ -19,7 +19,9 @@
       }
     ],
     "paymentStatus": "unpaid",
-    "categories": []
+    "categories": [
+      "Tyler"
+    ]
   },
   {
     "id": 1767832229746,
