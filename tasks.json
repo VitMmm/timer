@@ -95,5 +95,16 @@
     "categories": [
       "АРБ"
     ]
+  },
+  {
+    "id": 1769961640519,
+    "name": "Tyler logo",
+    "time": 0,
+    "isRunning": false,
+    "subtimers": [],
+    "paymentStatus": "unpaid",
+    "categories": [
+      "Tyler"
+    ]
   }
 ]
