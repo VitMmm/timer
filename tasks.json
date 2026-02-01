@@ -100,11 +100,12 @@
     "id": 1769961640519,
     "name": "Tyler logo",
     "time": 0,
-    "isRunning": false,
+    "isRunning": true,
     "subtimers": [],
     "paymentStatus": "unpaid",
     "categories": [
       "Tyler"
-    ]
+    ],
+    "startTime": 1769961647382
   }
 ]
