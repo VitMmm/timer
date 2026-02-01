@@ -99,20 +99,20 @@
   {
     "id": 1769961640519,
     "name": "Tyler logo",
-    "time": 1484,
-    "isRunning": true,
+    "time": 1659,
+    "isRunning": false,
     "subtimers": [
       {
         "id": 1769963995247.12,
         "name": "Tyler truspilot",
         "time": 0,
-        "isRunning": false
+        "isRunning": true,
+        "startTime": 1769963997901
       }
     ],
     "paymentStatus": "unpaid",
     "categories": [
       "Tyler"
-    ],
-    "startTime": 1769963821093
+    ]
   }
 ]
