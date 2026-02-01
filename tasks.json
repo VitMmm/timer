@@ -105,9 +105,8 @@
       {
         "id": 1769963995247.12,
         "name": "Tyler truspilot",
-        "time": 0,
-        "isRunning": true,
-        "startTime": 1769963997901
+        "time": 151,
+        "isRunning": false
       }
     ],
     "paymentStatus": "unpaid",
