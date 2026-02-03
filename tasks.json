@@ -42,10 +42,11 @@
     "time": 1717,
     "isRunning": false,
     "subtimers": [],
-    "paymentStatus": "unpaid",
+    "paymentStatus": "paid",
     "categories": [
       "Tyler"
-    ]
+    ],
+    "datePaid": "2026-02-03T13:05:54.950Z"
   },
   {
     "id": 1768729181025,
@@ -53,10 +54,11 @@
     "time": 15004,
     "isRunning": false,
     "subtimers": [],
-    "paymentStatus": "unpaid",
+    "paymentStatus": "paid",
     "categories": [
       "Tyler"
-    ]
+    ],
+    "datePaid": "2026-02-03T13:05:54.536Z"
   },
   {
     "id": 1769420999560,
@@ -64,10 +66,11 @@
     "time": 7397,
     "isRunning": false,
     "subtimers": [],
-    "paymentStatus": "unpaid",
+    "paymentStatus": "paid",
     "categories": [
       "АРБ"
-    ]
+    ],
+    "datePaid": "2026-02-03T13:05:53.822Z"
   },
   {
     "id": 1769422662988,
@@ -82,10 +85,11 @@
         "isRunning": false
       }
     ],
-    "paymentStatus": "unpaid",
+    "paymentStatus": "paid",
     "categories": [
       "АРБ"
-    ]
+    ],
+    "datePaid": "2026-02-03T13:05:53.493Z"
   },
   {
     "id": 1769422717903,
@@ -93,10 +97,11 @@
     "time": 4297,
     "isRunning": false,
     "subtimers": [],
-    "paymentStatus": "unpaid",
+    "paymentStatus": "paid",
     "categories": [
       "АРБ"
-    ]
+    ],
+    "datePaid": "2026-02-03T13:05:53.164Z"
   },
   {
     "id": 1769961640519,
