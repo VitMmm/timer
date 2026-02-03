@@ -18,10 +18,11 @@
         "isRunning": false
       }
     ],
-    "paymentStatus": "unpaid",
+    "paymentStatus": "paid",
     "categories": [
       "Tyler"
-    ]
+    ],
+    "datePaid": "2026-02-03T13:05:43.038Z"
   },
   {
     "id": 1767832229746,
