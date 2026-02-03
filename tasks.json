@@ -1,17 +1,5 @@
 [
   {
-    "id": 1767832229746,
-    "name": "Tyler v2",
-    "time": 7066,
-    "isRunning": false,
-    "subtimers": [],
-    "paymentStatus": "paid",
-    "categories": [
-      "Tyler"
-    ],
-    "datePaid": "2026-02-03T13:05:49.652Z"
-  },
-  {
     "id": 1768222837493,
     "name": "Скрипты динамических дат",
     "time": 1717,
