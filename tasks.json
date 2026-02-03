@@ -1,30 +1,5 @@
 [
   {
-    "id": 1767832095483,
-    "name": "Tyler",
-    "time": 24513,
-    "isRunning": false,
-    "subtimers": [
-      {
-        "id": 1767832111003.7258,
-        "name": "Доработка",
-        "time": 28872,
-        "isRunning": false
-      },
-      {
-        "id": 1769420881811.03,
-        "name": "Доработка гифки",
-        "time": 4458,
-        "isRunning": false
-      }
-    ],
-    "paymentStatus": "paid",
-    "categories": [
-      "Tyler"
-    ],
-    "datePaid": "2026-02-03T13:05:43.038Z"
-  },
-  {
     "id": 1767832229746,
     "name": "Tyler v2",
     "time": 7066,
