@@ -30,10 +30,11 @@
     "time": 7066,
     "isRunning": false,
     "subtimers": [],
-    "paymentStatus": "unpaid",
+    "paymentStatus": "paid",
     "categories": [
       "Tyler"
-    ]
+    ],
+    "datePaid": "2026-02-03T13:05:49.652Z"
   },
   {
     "id": 1768222837493,
