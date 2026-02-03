@@ -1,17 +1,5 @@
 [
   {
-    "id": 1768729181025,
-    "name": "Ленды с быком",
-    "time": 15004,
-    "isRunning": false,
-    "subtimers": [],
-    "paymentStatus": "paid",
-    "categories": [
-      "Tyler"
-    ],
-    "datePaid": "2026-02-03T13:05:54.536Z"
-  },
-  {
     "id": 1769420999560,
     "name": "Dolomiti superski",
     "time": 7397,
