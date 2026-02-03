@@ -1,36 +1,5 @@
 [
   {
-    "id": 1769420999560,
-    "name": "Dolomiti superski",
-    "time": 7397,
-    "isRunning": false,
-    "subtimers": [],
-    "paymentStatus": "paid",
-    "categories": [
-      "АРБ"
-    ],
-    "datePaid": "2026-02-03T13:05:53.822Z"
-  },
-  {
-    "id": 1769422662988,
-    "name": "OBB",
-    "time": 97793,
-    "isRunning": false,
-    "subtimers": [
-      {
-        "id": 1769422681440.168,
-        "name": "Доработка",
-        "time": 3600,
-        "isRunning": false
-      }
-    ],
-    "paymentStatus": "paid",
-    "categories": [
-      "АРБ"
-    ],
-    "datePaid": "2026-02-03T13:05:53.493Z"
-  },
-  {
     "id": 1769422717903,
     "name": "skiwelt",
     "time": 4297,
