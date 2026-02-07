@@ -16,5 +16,16 @@
     "categories": [
       "Tyler"
     ]
+  },
+  {
+    "id": 1770458036495,
+    "name": "Верстка Tyler",
+    "time": 0,
+    "isRunning": false,
+    "subtimers": [],
+    "paymentStatus": "unpaid",
+    "categories": [
+      "Tyler"
+    ]
   }
 ]
