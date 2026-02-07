@@ -21,11 +21,12 @@
     "id": 1770458036495,
     "name": "Верстка Tyler",
     "time": 0,
-    "isRunning": false,
+    "isRunning": true,
     "subtimers": [],
     "paymentStatus": "unpaid",
     "categories": [
       "Tyler"
-    ]
+    ],
+    "startTime": 1770458038317
   }
 ]
