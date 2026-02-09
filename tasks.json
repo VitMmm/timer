@@ -36,5 +36,14 @@
     "subtimers": [],
     "paymentStatus": "unpaid",
     "categories": []
+  },
+  {
+    "id": 1770632426975,
+    "name": "TSR ленды",
+    "time": 0,
+    "isRunning": false,
+    "subtimers": [],
+    "paymentStatus": "unpaid",
+    "categories": []
   }
 ]
