@@ -32,9 +32,10 @@
     "id": 1770631885747,
     "name": "Shadow room",
     "time": 0,
-    "isRunning": false,
+    "isRunning": true,
     "subtimers": [],
     "paymentStatus": "unpaid",
-    "categories": []
+    "categories": [],
+    "startTime": 1770631888616
   }
 ]
