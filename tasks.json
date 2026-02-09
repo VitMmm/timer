@@ -40,11 +40,10 @@
   {
     "id": 1770632426975,
     "name": "TSR ленды",
-    "time": 0,
-    "isRunning": true,
+    "time": 405,
+    "isRunning": false,
     "subtimers": [],
     "paymentStatus": "unpaid",
-    "categories": [],
-    "startTime": 1770632429352
+    "categories": []
   }
 ]
