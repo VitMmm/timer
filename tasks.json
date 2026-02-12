@@ -45,5 +45,14 @@
     "subtimers": [],
     "paymentStatus": "unpaid",
     "categories": []
+  },
+  {
+    "id": 1770898089996,
+    "name": "Парсинг лендов",
+    "time": 0,
+    "isRunning": false,
+    "subtimers": [],
+    "paymentStatus": "unpaid",
+    "categories": []
   }
 ]
