@@ -54,5 +54,16 @@
     "subtimers": [],
     "paymentStatus": "unpaid",
     "categories": []
+  },
+  {
+    "id": 1770979864553,
+    "name": "Tyler Фиолетовые кнопки",
+    "time": 0,
+    "isRunning": false,
+    "subtimers": [],
+    "paymentStatus": "unpaid",
+    "categories": [
+      "Tyler"
+    ]
   }
 ]
