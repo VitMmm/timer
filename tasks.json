@@ -59,11 +59,12 @@
     "id": 1770979864553,
     "name": "Tyler Фиолетовые кнопки",
     "time": 9934,
-    "isRunning": false,
+    "isRunning": true,
     "subtimers": [],
     "paymentStatus": "unpaid",
     "categories": [
       "Tyler"
-    ]
+    ],
+    "startTime": 1770994859893
   }
 ]
