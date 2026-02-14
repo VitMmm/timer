@@ -49,12 +49,11 @@
   {
     "id": 1770898089996,
     "name": "Парсинг лендов",
-    "time": 12228,
-    "isRunning": true,
+    "time": 15345,
+    "isRunning": false,
     "subtimers": [],
     "paymentStatus": "unpaid",
-    "categories": [],
-    "startTime": 1771062639630
+    "categories": []
   },
   {
     "id": 1770979864553,
