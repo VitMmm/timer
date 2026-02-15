@@ -69,13 +69,12 @@
   {
     "id": 1771154301583,
     "name": "Tyler gold",
-    "time": 0,
-    "isRunning": true,
+    "time": 7793,
+    "isRunning": false,
     "subtimers": [],
     "paymentStatus": "unpaid",
     "categories": [
       "Tyler"
-    ],
-    "startTime": 1771154308259
+    ]
   }
 ]
