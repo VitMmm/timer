@@ -65,5 +65,16 @@
     "categories": [
       "Tyler"
     ]
+  },
+  {
+    "id": 1771154301583,
+    "name": "Tyler gold",
+    "time": 0,
+    "isRunning": false,
+    "subtimers": [],
+    "paymentStatus": "unpaid",
+    "categories": [
+      "Tyler"
+    ]
   }
 ]
