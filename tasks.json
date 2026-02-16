@@ -81,9 +81,10 @@
     "id": 1771255020805,
     "name": "TSR",
     "time": 0,
-    "isRunning": false,
+    "isRunning": true,
     "subtimers": [],
     "paymentStatus": "unpaid",
-    "categories": []
+    "categories": [],
+    "startTime": 1771255022459
   }
 ]
