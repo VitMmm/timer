@@ -89,13 +89,12 @@
   {
     "id": 1771320192608,
     "name": "Tyler - Victory Pips",
-    "time": 973,
-    "isRunning": true,
+    "time": 11927,
+    "isRunning": false,
     "subtimers": [],
     "paymentStatus": "unpaid",
     "categories": [
       "Tyler"
-    ],
-    "startTime": 1771335579414
+    ]
   }
 ]
