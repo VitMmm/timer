@@ -100,13 +100,12 @@
   {
     "id": 1771359320176,
     "name": "Tyler - Yellow",
-    "time": 3933,
-    "isRunning": true,
+    "time": 3935,
+    "isRunning": false,
     "subtimers": [],
     "paymentStatus": "unpaid",
     "categories": [
       "Tyler"
-    ],
-    "startTime": 1771363280547
+    ]
   }
 ]
