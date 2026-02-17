@@ -107,5 +107,14 @@
     "categories": [
       "Tyler"
     ]
+  },
+  {
+    "id": 1771363292873,
+    "name": "Аватарки",
+    "time": 0,
+    "isRunning": false,
+    "subtimers": [],
+    "paymentStatus": "unpaid",
+    "categories": []
   }
 ]
