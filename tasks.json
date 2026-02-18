@@ -84,7 +84,9 @@
     "isRunning": false,
     "subtimers": [],
     "paymentStatus": "unpaid",
-    "categories": []
+    "categories": [
+      "Остальные"
+    ]
   },
   {
     "id": 1771320192608,
