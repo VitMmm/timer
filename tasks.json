@@ -115,7 +115,9 @@
     "isRunning": false,
     "subtimers": [],
     "paymentStatus": "unpaid",
-    "categories": []
+    "categories": [
+      "Tyler"
+    ]
   },
   {
     "id": 1771414246278,
