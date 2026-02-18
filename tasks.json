@@ -113,14 +113,13 @@
   {
     "id": 1771363292873,
     "name": "Аватарки",
-    "time": 13550,
-    "isRunning": true,
+    "time": 15412,
+    "isRunning": false,
     "subtimers": [],
     "paymentStatus": "unpaid",
     "categories": [
       "Tyler"
-    ],
-    "startTime": 1771424488592
+    ]
   },
   {
     "id": 1771414246278,
