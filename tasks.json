@@ -116,5 +116,14 @@
     "subtimers": [],
     "paymentStatus": "unpaid",
     "categories": []
+  },
+  {
+    "id": 1771414246278,
+    "name": "Tyler замена баннера + отзыв",
+    "time": 0,
+    "isRunning": false,
+    "subtimers": [],
+    "paymentStatus": "unpaid",
+    "categories": []
   }
 ]
