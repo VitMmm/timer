@@ -121,11 +121,12 @@
     "id": 1771414246278,
     "name": "Tyler замена баннера + отзыв",
     "time": 0,
-    "isRunning": false,
+    "isRunning": true,
     "subtimers": [],
     "paymentStatus": "unpaid",
     "categories": [
       "Tyler"
-    ]
+    ],
+    "startTime": 1771414252045
   }
 ]
