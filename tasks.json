@@ -135,13 +135,12 @@
   {
     "id": 1771443446940,
     "name": "Trading Academy SIgnal to Tyler",
-    "time": 1266,
-    "isRunning": true,
+    "time": 6694,
+    "isRunning": false,
     "subtimers": [],
     "paymentStatus": "unpaid",
     "categories": [
       "Tyler"
-    ],
-    "startTime": 1771448353038
+    ]
   }
 ]
