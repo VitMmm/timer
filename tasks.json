@@ -146,13 +146,12 @@
   {
     "id": 1771520423234,
     "name": "Dynalogic to Tyler",
-    "time": 0,
-    "isRunning": true,
+    "time": 1796,
+    "isRunning": false,
     "subtimers": [],
     "paymentStatus": "unpaid",
     "categories": [
       "Tyler"
-    ],
-    "startTime": 1771520425197
+    ]
   }
 ]
