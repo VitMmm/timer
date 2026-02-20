@@ -158,11 +158,12 @@
     "id": 1771601670869,
     "name": "Верстка Tyler - Green land",
     "time": 5545,
-    "isRunning": false,
+    "isRunning": true,
     "subtimers": [],
     "paymentStatus": "unpaid",
     "categories": [
       "Tyler"
-    ]
+    ],
+    "startTime": 1771614940258
   }
 ]
