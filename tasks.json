@@ -125,9 +125,8 @@
       {
         "id": 1771671540273.7625,
         "name": "Доп отзывы",
-        "time": 1638,
-        "isRunning": true,
-        "startTime": 1771691260663
+        "time": 4826,
+        "isRunning": false
       }
     ],
     "paymentStatus": "unpaid",
