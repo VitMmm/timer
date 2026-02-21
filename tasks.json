@@ -121,7 +121,14 @@
     "name": "Аватарки",
     "time": 15412,
     "isRunning": false,
-    "subtimers": [],
+    "subtimers": [
+      {
+        "id": 1771671540273.7625,
+        "name": "Доп отзывы",
+        "time": 0,
+        "isRunning": false
+      }
+    ],
     "paymentStatus": "unpaid",
     "categories": [
       "Tyler"
