@@ -127,6 +127,12 @@
         "name": "Доп отзывы",
         "time": 4826,
         "isRunning": false
+      },
+      {
+        "id": 1771856760041.508,
+        "name": "Замена видео отзывов - финалка?",
+        "time": 0,
+        "isRunning": false
       }
     ],
     "paymentStatus": "unpaid",
