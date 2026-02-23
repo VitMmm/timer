@@ -132,7 +132,8 @@
         "id": 1771856760041.508,
         "name": "Замена видео отзывов - финалка?",
         "time": 0,
-        "isRunning": false
+        "isRunning": true,
+        "startTime": 1771859039125
       }
     ],
     "paymentStatus": "unpaid",
