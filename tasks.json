@@ -167,17 +167,5 @@
       "Tyler"
     ],
     "datePaid": "2026-03-08T13:12:26.772Z"
-  },
-  {
-    "id": 1771847546357,
-    "name": "Замена видеоотзывов",
-    "time": 2434,
-    "isRunning": false,
-    "subtimers": [],
-    "paymentStatus": "paid",
-    "categories": [
-      "Остальные"
-    ],
-    "datePaid": "2026-03-08T13:12:27.078Z"
   }
 ]
