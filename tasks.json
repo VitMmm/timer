@@ -186,9 +186,10 @@
     "time": 5521,
     "isRunning": false,
     "subtimers": [],
-    "paymentStatus": "unpaid",
+    "paymentStatus": "paid",
     "categories": [
       "Tyler"
-    ]
+    ],
+    "datePaid": "2026-03-08T13:12:28.137Z"
   }
 ]
