@@ -1,26 +1,15 @@
 [
   {
-    "id": 1770458036495,
-    "name": "Верстка Tyler",
-    "time": 4155,
-    "isRunning": false,
-    "subtimers": [],
-    "paymentStatus": "paid",
-    "categories": [
-      "Tyler"
-    ],
-    "datePaid": "2026-03-08T13:12:17.950Z"
-  },
-  {
     "id": 1770631885747,
     "name": "Shadow room",
     "time": 639,
     "isRunning": false,
     "subtimers": [],
-    "paymentStatus": "unpaid",
+    "paymentStatus": "paid",
     "categories": [
       "Остальные"
-    ]
+    ],
+    "datePaid": "2026-03-08T13:12:19.735Z"
   },
   {
     "id": 1770632426975,
@@ -28,10 +17,11 @@
     "time": 585,
     "isRunning": false,
     "subtimers": [],
-    "paymentStatus": "unpaid",
+    "paymentStatus": "paid",
     "categories": [
       "Остальные"
-    ]
+    ],
+    "datePaid": "2026-03-08T13:12:20.334Z"
   },
   {
     "id": 1770898089996,
@@ -39,10 +29,11 @@
     "time": 15345,
     "isRunning": false,
     "subtimers": [],
-    "paymentStatus": "unpaid",
+    "paymentStatus": "paid",
     "categories": [
       "Остальные"
-    ]
+    ],
+    "datePaid": "2026-03-08T13:12:20.694Z"
   },
   {
     "id": 1770979864553,
@@ -50,10 +41,11 @@
     "time": 19337,
     "isRunning": false,
     "subtimers": [],
-    "paymentStatus": "unpaid",
+    "paymentStatus": "paid",
     "categories": [
       "Tyler"
-    ]
+    ],
+    "datePaid": "2026-03-08T13:12:21.475Z"
   },
   {
     "id": 1771154301583,
@@ -61,10 +53,11 @@
     "time": 13677,
     "isRunning": false,
     "subtimers": [],
-    "paymentStatus": "unpaid",
+    "paymentStatus": "paid",
     "categories": [
       "Tyler"
-    ]
+    ],
+    "datePaid": "2026-03-08T13:12:21.819Z"
   },
   {
     "id": 1771255020805,
