@@ -70,17 +70,5 @@
       "Остальные"
     ],
     "datePaid": "2026-03-08T13:12:22.869Z"
-  },
-  {
-    "id": 1771320192608,
-    "name": "Tyler - Victory Pips",
-    "time": 11927,
-    "isRunning": false,
-    "subtimers": [],
-    "paymentStatus": "paid",
-    "categories": [
-      "Tyler"
-    ],
-    "datePaid": "2026-03-08T13:12:23.205Z"
   }
 ]
