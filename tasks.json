@@ -155,17 +155,5 @@
       "Tyler"
     ],
     "datePaid": "2026-03-08T13:12:25.955Z"
-  },
-  {
-    "id": 1771601670869,
-    "name": "Верстка Tyler - Green land",
-    "time": 12106,
-    "isRunning": false,
-    "subtimers": [],
-    "paymentStatus": "paid",
-    "categories": [
-      "Tyler"
-    ],
-    "datePaid": "2026-03-08T13:12:26.772Z"
   }
 ]
