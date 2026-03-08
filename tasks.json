@@ -65,10 +65,11 @@
     "time": 2478,
     "isRunning": false,
     "subtimers": [],
-    "paymentStatus": "unpaid",
+    "paymentStatus": "paid",
     "categories": [
       "Остальные"
-    ]
+    ],
+    "datePaid": "2026-03-08T13:12:22.869Z"
   },
   {
     "id": 1771320192608,
@@ -76,10 +77,11 @@
     "time": 11927,
     "isRunning": false,
     "subtimers": [],
-    "paymentStatus": "unpaid",
+    "paymentStatus": "paid",
     "categories": [
       "Tyler"
-    ]
+    ],
+    "datePaid": "2026-03-08T13:12:23.205Z"
   },
   {
     "id": 1771359320176,
@@ -87,10 +89,11 @@
     "time": 12227,
     "isRunning": false,
     "subtimers": [],
-    "paymentStatus": "unpaid",
+    "paymentStatus": "paid",
     "categories": [
       "Tyler"
-    ]
+    ],
+    "datePaid": "2026-03-08T13:12:23.514Z"
   },
   {
     "id": 1771363292873,
@@ -111,10 +114,11 @@
         "isRunning": false
       }
     ],
-    "paymentStatus": "unpaid",
+    "paymentStatus": "paid",
     "categories": [
       "Tyler"
-    ]
+    ],
+    "datePaid": "2026-03-08T13:12:24.164Z"
   },
   {
     "id": 1771414246278,
@@ -122,10 +126,11 @@
     "time": 521,
     "isRunning": false,
     "subtimers": [],
-    "paymentStatus": "unpaid",
+    "paymentStatus": "paid",
     "categories": [
       "Tyler"
-    ]
+    ],
+    "datePaid": "2026-03-08T13:12:24.946Z"
   },
   {
     "id": 1771443446940,
@@ -133,10 +138,11 @@
     "time": 6885,
     "isRunning": false,
     "subtimers": [],
-    "paymentStatus": "unpaid",
+    "paymentStatus": "paid",
     "categories": [
       "Tyler"
-    ]
+    ],
+    "datePaid": "2026-03-08T13:12:25.663Z"
   },
   {
     "id": 1771520423234,
@@ -144,10 +150,11 @@
     "time": 6616,
     "isRunning": false,
     "subtimers": [],
-    "paymentStatus": "unpaid",
+    "paymentStatus": "paid",
     "categories": [
       "Tyler"
-    ]
+    ],
+    "datePaid": "2026-03-08T13:12:25.955Z"
   },
   {
     "id": 1771601670869,
@@ -155,10 +162,11 @@
     "time": 12106,
     "isRunning": false,
     "subtimers": [],
-    "paymentStatus": "unpaid",
+    "paymentStatus": "paid",
     "categories": [
       "Tyler"
-    ]
+    ],
+    "datePaid": "2026-03-08T13:12:26.772Z"
   },
   {
     "id": 1771847546357,
@@ -166,10 +174,11 @@
     "time": 2434,
     "isRunning": false,
     "subtimers": [],
-    "paymentStatus": "unpaid",
+    "paymentStatus": "paid",
     "categories": [
       "Остальные"
-    ]
+    ],
+    "datePaid": "2026-03-08T13:12:27.078Z"
   },
   {
     "id": 1772618272788,
