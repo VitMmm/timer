@@ -120,17 +120,5 @@
       "Tyler"
     ],
     "datePaid": "2026-03-08T13:12:24.164Z"
-  },
-  {
-    "id": 1771414246278,
-    "name": "Tyler замена баннера + отзыв",
-    "time": 521,
-    "isRunning": false,
-    "subtimers": [],
-    "paymentStatus": "paid",
-    "categories": [
-      "Tyler"
-    ],
-    "datePaid": "2026-03-08T13:12:24.946Z"
   }
 ]
