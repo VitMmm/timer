@@ -95,30 +95,5 @@
       "Tyler"
     ],
     "datePaid": "2026-03-08T13:12:23.514Z"
-  },
-  {
-    "id": 1771363292873,
-    "name": "Аватарки",
-    "time": 15412,
-    "isRunning": false,
-    "subtimers": [
-      {
-        "id": 1771671540273.7625,
-        "name": "Доп отзывы",
-        "time": 4826,
-        "isRunning": false
-      },
-      {
-        "id": 1771856760041.508,
-        "name": "Замена видео отзывов - финалка?",
-        "time": 2370,
-        "isRunning": false
-      }
-    ],
-    "paymentStatus": "paid",
-    "categories": [
-      "Tyler"
-    ],
-    "datePaid": "2026-03-08T13:12:24.164Z"
   }
 ]
