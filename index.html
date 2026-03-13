@@ -442,7 +442,6 @@
       .additional-payment-info {
         flex: 1;
         display: flex;
-        flex-direction: column;
         gap: 5px;
       }
 
@@ -617,6 +616,20 @@
       .task-note-block.empty {
         color: #999;
         font-style: italic;
+      }
+
+      .timer-preview-img {
+        width: 48px;
+        height: 48px;
+        object-fit: cover;
+        border-radius: 8px;
+        flex-shrink: 0;
+      }
+
+      .timer-preview-wrap {
+        display: flex;
+        align-items: center;
+        gap: 12px;
       }
 
       .modal-buttons {
@@ -1207,6 +1220,22 @@
       </div>
     </div>
 
+    <!-- Модальное окно для превью таймера (картинка хранится как data URL в коде) -->
+    <div id="previewModal" class="modal-overlay" style="display: none">
+      <div class="modal-content">
+        <h2 class="modal-title" id="previewModalTitle">Превью таймера</h2>
+        <p style="font-size: 13px; color: #666; margin-bottom: 10px">Выберите файл или вставьте data URL (data:image/...;base64,...)</p>
+        <input type="file" id="previewModalFile" accept="image/*" style="margin-bottom: 10px" />
+        <textarea id="previewModalDataUrl" class="modal-textarea" placeholder="data:image/png;base64,..." rows="3" style="min-height: 60px"></textarea>
+        <div id="previewModalPreview" style="margin: 10px 0; max-height: 120px; text-align: center"></div>
+        <div class="modal-buttons">
+          <button id="previewModalRemove" class="modal-button" style="background: #e53e3e">Удалить превью</button>
+          <button id="previewModalCancel" class="modal-button modal-button-secondary">Отмена</button>
+          <button id="previewModalOk" class="modal-button modal-button-primary">Сохранить</button>
+        </div>
+      </div>
+    </div>
+
     <!-- Контейнер для уведомлений -->
     <div id="toastContainer"></div>
 
@@ -1653,6 +1682,117 @@
         if (newNote === null) return;
 
         subtimer.note = newNote;
+        await autoSaveTasks();
+        renderTimerPayments();
+      }
+
+      function readFileAsDataUrl(file) {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(reader.result);
+          reader.onerror = reject;
+          reader.readAsDataURL(file);
+        });
+      }
+
+      function showPreviewModal(title, currentDataUrl) {
+        return new Promise((resolve) => {
+          const modal = document.getElementById('previewModal');
+          const titleEl = document.getElementById('previewModalTitle');
+          const fileInput = document.getElementById('previewModalFile');
+          const dataUrlEl = document.getElementById('previewModalDataUrl');
+          const previewDiv = document.getElementById('previewModalPreview');
+          const okBtn = document.getElementById('previewModalOk');
+          const cancelBtn = document.getElementById('previewModalCancel');
+          const removeBtn = document.getElementById('previewModalRemove');
+
+          titleEl.textContent = title;
+          fileInput.value = '';
+          dataUrlEl.value = currentDataUrl || '';
+          const updatePreview = (dataUrl) => {
+            if (dataUrl && dataUrl.startsWith('data:image')) {
+              previewDiv.innerHTML = `<img src="${dataUrl.replace(/"/g, '&quot;')}" style="max-width: 120px; max-height: 120px; border-radius: 8px" alt="" />`;
+            } else {
+              previewDiv.innerHTML = '';
+            }
+          };
+          updatePreview(currentDataUrl || '');
+
+          const cleanup = () => {
+            modal.style.display = 'none';
+            fileInput.value = '';
+            dataUrlEl.value = '';
+            previewDiv.innerHTML = '';
+            fileInput.onchange = null;
+            dataUrlEl.oninput = null;
+            okBtn.onclick = null;
+            cancelBtn.onclick = null;
+            removeBtn.onclick = null;
+            modal.onclick = null;
+          };
+
+          fileInput.onchange = async () => {
+            const file = fileInput.files[0];
+            if (!file || !file.type.startsWith('image/')) return;
+            try {
+              const dataUrl = await readFileAsDataUrl(file);
+              dataUrlEl.value = dataUrl;
+              updatePreview(dataUrl);
+            } catch (e) {
+              showToast('Не удалось прочитать файл', 'error');
+            }
+          };
+
+          dataUrlEl.oninput = () => updatePreview(dataUrlEl.value.trim());
+
+          okBtn.onclick = async () => {
+            let dataUrl = dataUrlEl.value.trim();
+            if (fileInput.files[0]) {
+              try {
+                dataUrl = await readFileAsDataUrl(fileInput.files[0]);
+              } catch (e) {
+                showToast('Не удалось прочитать файл', 'error');
+                return;
+              }
+            }
+            if (!dataUrl || !dataUrl.startsWith('data:image')) {
+              showToast('Выберите изображение или вставьте data URL', 'error');
+              return;
+            }
+            cleanup();
+            resolve(dataUrl);
+          };
+
+          removeBtn.onclick = () => {
+            cleanup();
+            resolve('');
+          };
+
+          cancelBtn.onclick = () => {
+            cleanup();
+            resolve(null);
+          };
+
+          modal.onclick = (e) => {
+            if (e.target === modal) {
+              cleanup();
+              resolve(null);
+            }
+          };
+
+          modal.style.display = 'flex';
+          dataUrlEl.focus();
+        });
+      }
+
+      async function editTaskPreview(taskId) {
+        const task = tasks.find((t) => t.id === taskId);
+        if (!task) return;
+
+        const result = await showPreviewModal(`Превью для «${task.name.replace(/"/g, '\\"')}»`, task.previewImage || '');
+        if (result === null) return;
+
+        task.previewImage = result;
         await autoSaveTasks();
         renderTimerPayments();
       }
@@ -2126,12 +2266,19 @@
               });
             }
 
+            const previewImg = task && (task.previewImage || '').trim();
+            const previewBlock = previewImg ? `<img src="${previewImg.replace(/"/g, '&quot;')}" class="timer-preview-img" alt="" />` : '';
+
             return `
           <div class="additional-payment-item" style="flex-direction: column; align-items: flex-start">
             <div style="display: flex; width: 100%; align-items: center; justify-content: space-between;">
-              <div class="additional-payment-info" style="flex: 1">
-                <div class="additional-payment-name">${escapeHtml(payment.name)}</div>
-                <div class="additional-payment-date">Общее время: ${formatTime(payment.time)}</div>
+              <div class="additional-payment-info timer-preview-wrap" style="flex: 1">
+                ${previewBlock}
+                <div style="flex: 1; min-width: 0">
+                  <div class="additional-payment-name">${escapeHtml(payment.name)}</div>
+                  <div class="additional-payment-date">Общее время: ${formatTime(payment.time)}</div>
+                  <button class="btn-add-subtimer" onclick="editTaskPreview(${payment.id})" style="padding: 4px 10px; font-size: 11px; margin-top: 4px">📷 ${previewImg ? 'Изменить превью' : 'Добавить превью'}</button>
+                </div>
               </div>
               <div class="additional-payment-amount" style="margin-right: 10px">${payment.amount.toFixed(1)} USDT</div>
               <div style="display: flex; gap: 8px">
@@ -2488,6 +2635,9 @@
               if (task.note === undefined) {
                 task.note = '';
               }
+              if (task.previewImage === undefined) {
+                task.previewImage = '';
+              }
               (task.subtimers || []).forEach((st) => {
                 if (st.note === undefined) st.note = '';
               });
@@ -2544,6 +2694,9 @@
                 }
                 if (task.note === undefined) {
                   task.note = '';
+                }
+                if (task.previewImage === undefined) {
+                  task.previewImage = '';
                 }
                 (task.subtimers || []).forEach((st) => {
                   if (st.note === undefined) st.note = '';
@@ -2663,6 +2816,7 @@
           paymentStatus: 'unpaid',
           categories: selectedCats || [],
           note: '',
+          previewImage: '',
         };
 
         tasks.push(newTask);
