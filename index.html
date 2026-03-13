@@ -586,6 +586,39 @@
         border-color: #667eea;
       }
 
+      .modal-textarea {
+        width: 100%;
+        padding: 12px 15px;
+        border: 2px solid #e0e0e0;
+        border-radius: 8px;
+        font-size: 14px;
+        font-family: inherit;
+        resize: vertical;
+        min-height: 100px;
+        margin-bottom: 15px;
+      }
+
+      .modal-textarea:focus {
+        outline: none;
+        border-color: #667eea;
+      }
+
+      .task-note-block {
+        margin-top: 8px;
+        padding: 10px 12px;
+        background: #f8f9fa;
+        border-radius: 8px;
+        font-size: 14px;
+        color: #555;
+        white-space: pre-wrap;
+        word-break: break-word;
+      }
+
+      .task-note-block.empty {
+        color: #999;
+        font-style: italic;
+      }
+
       .modal-buttons {
         display: flex;
         gap: 10px;
@@ -872,7 +905,7 @@
         background: #f0f0f0;
       }
 
-      .category-checkbox-item input[type="checkbox"] {
+      .category-checkbox-item input[type='checkbox'] {
         width: 18px;
         height: 18px;
         cursor: pointer;
@@ -1162,6 +1195,18 @@
       </div>
     </div>
 
+    <!-- Модальное окно для заметки к задаче -->
+    <div id="noteModal" class="modal-overlay" style="display: none">
+      <div class="modal-content">
+        <h2 class="modal-title" id="noteModalTitle">Заметка к задаче</h2>
+        <textarea id="noteModalText" class="modal-textarea" placeholder="Опишите задачу или добавьте заметку..." rows="5"></textarea>
+        <div class="modal-buttons">
+          <button id="noteModalCancel" class="modal-button modal-button-secondary">Отмена</button>
+          <button id="noteModalOk" class="modal-button modal-button-primary">Сохранить</button>
+        </div>
+      </div>
+    </div>
+
     <!-- Контейнер для уведомлений -->
     <div id="toastContainer"></div>
 
@@ -1339,17 +1384,15 @@
           return;
         }
         list.innerHTML = allCategories
-          .map(
-            (category, index) => {
-              const escapedCategory = escapeHtml(category);
-              return `
+          .map((category, index) => {
+            const escapedCategory = escapeHtml(category);
+            return `
           <div class="category-tag ${selectedCategories.includes(category) ? 'active' : ''}" data-category-index="${index}" onclick="toggleCategoryFilterByIndex(${index})">
             ${escapedCategory}
             ${selectedCategories.includes(category) ? `<span class="category-tag-remove" onclick="event.stopPropagation(); removeCategoryFilterByIndex(${index})">×</span>` : ''}
           </div>
         `;
-            }
-          )
+          })
           .join('');
         renderCategoriesStats();
       }
@@ -1366,7 +1409,7 @@
 
         // Собираем статистику по категориям
         const categoryStats = {};
-        
+
         allCategories.forEach((category) => {
           categoryStats[category] = {
             totalTime: 0,
@@ -1378,10 +1421,10 @@
         // Проходим по всем задачам и суммируем время и стоимость по категориям
         tasks.forEach((task) => {
           if (!task.categories || task.categories.length === 0) return;
-          
+
           const taskTime = getTotalTaskTime(task);
           const taskCost = calculateTaskCost(task);
-          
+
           task.categories.forEach((category) => {
             if (categoryStats[category]) {
               categoryStats[category].totalTime += taskTime;
@@ -1529,11 +1572,10 @@
         }
 
         list.innerHTML = allCategories
-          .map(
-            (category, index) => {
-              const escapedCategory = escapeHtml(category);
-              const safeId = `cat_modal_${index}_${category.replace(/[^a-zA-Z0-9]/g, '_')}`;
-              return `
+          .map((category, index) => {
+            const escapedCategory = escapeHtml(category);
+            const safeId = `cat_modal_${index}_${category.replace(/[^a-zA-Z0-9]/g, '_')}`;
+            return `
           <div class="category-checkbox-item">
             <input 
               type="checkbox" 
@@ -1545,8 +1587,7 @@
             <label for="${safeId}">${escapedCategory}</label>
           </div>
         `;
-            }
-          )
+          })
           .join('');
       }
 
@@ -1587,6 +1628,33 @@
         renderCategoriesStats();
         renderTimerPayments();
         updatePaymentStats();
+      }
+
+      async function editTaskNote(taskId) {
+        const task = tasks.find((t) => t.id === taskId);
+        if (!task) return;
+
+        const newNote = await showNoteModal(`Заметка к основному таймеру "${task.name}"`, task.note || '');
+        if (newNote === null) return; // Отмена
+
+        task.note = newNote;
+        await autoSaveTasks();
+        renderTasks();
+        renderTimerPayments();
+      }
+
+      async function editSubtimerNote(taskId, subtimerId) {
+        const task = tasks.find((t) => t.id === taskId);
+        if (!task || !task.subtimers) return;
+        const subtimer = task.subtimers.find((st) => st.id === subtimerId);
+        if (!subtimer) return;
+
+        const newNote = await showNoteModal(`Заметка к подтаймеру "${subtimer.name}"`, subtimer.note || '');
+        if (newNote === null) return;
+
+        subtimer.note = newNote;
+        await autoSaveTasks();
+        renderTimerPayments();
       }
 
       // Получение курса USDT/RUB
@@ -1633,7 +1701,7 @@
       // Получить общее время задачи (включая подтаймеры)
       function getTotalTaskTime(task) {
         let totalTime = task.time || 0;
-        
+
         // Добавляем время с текущего запуска основного таймера, если он работает
         if (task.isRunning && task.startTime) {
           const elapsed = Math.floor((Date.now() - task.startTime) / 1000);
@@ -1643,13 +1711,13 @@
         if (task.subtimers && task.subtimers.length > 0) {
           task.subtimers.forEach((subtimer) => {
             let subtimerTime = subtimer.time || 0;
-            
+
             // Добавляем время с текущего запуска подтаймера, если он работает
             if (subtimer.isRunning && subtimer.startTime) {
               const elapsed = Math.floor((Date.now() - subtimer.startTime) / 1000);
               subtimerTime += elapsed;
             }
-            
+
             totalTime += subtimerTime;
           });
         }
@@ -2000,9 +2068,7 @@
               if (!payment.categories || payment.categories.length === 0) {
                 return false; // Если у задачи нет категорий, она не показывается при активном фильтре
               }
-              const hasSelectedCategory = selectedCategories.some((selectedCat) => 
-                payment.categories.includes(selectedCat)
-              );
+              const hasSelectedCategory = selectedCategories.some((selectedCat) => payment.categories.includes(selectedCat));
               if (!hasSelectedCategory) return false;
             }
             return true;
@@ -2029,13 +2095,18 @@
             const isPaid = payment.status === 'paid';
             const task = tasks.find((t) => t.id === payment.id);
 
-            // Формируем детализацию времени
+            // Формируем детализацию времени: каждая строка (основной таймер и подтаймеры) со своей заметкой
             let timeDetails = '';
 
             // Основной таймер
             if (task && task.time > 0) {
-              timeDetails += `<div style="font-size: 13px; color: #666; margin-top: 5px; padding-left: 10px; border-left: 2px solid #667eea">
+              const mainNote = (task.note || '').trim();
+              timeDetails += `<div style="font-size: 13px; color: #666; margin-top: 8px; padding: 8px 10px; border-left: 2px solid #667eea; background: #f8f9fa; border-radius: 0 8px 8px 0; position: relative">
                 <strong>Основной таймер:</strong> ${formatTime(task.time)}
+                <div class="task-note-block ${mainNote ? '' : 'empty'}" style="margin-top: 6px; font-size: 12px">${mainNote ? escapeHtml(mainNote) : 'Нет заметки'}</div>
+                <button class="btn-add-subtimer" onclick="editTaskNote(${payment.id})" style="padding: 4px 10px; font-size: 11px; margin-top: 6px; position: absolute; right: 10px; top: 5px;">📝 ${
+                mainNote ? 'Изменить заметку' : 'Добавить заметку'
+              }</button>
               </div>`;
             }
 
@@ -2043,8 +2114,13 @@
             if (task && task.subtimers && task.subtimers.length > 0) {
               task.subtimers.forEach((subtimer) => {
                 if (subtimer.time > 0) {
-                  timeDetails += `<div style="font-size: 13px; color: #666; margin-top: 5px; padding-left: 10px; border-left: 2px solid #764ba2">
+                  const subNote = (subtimer.note || '').trim();
+                  timeDetails += `<div style="font-size: 13px; color: #666; margin-top: 8px; padding: 8px 10px; border-left: 2px solid #764ba2; background: #f8f9fa; border-radius: 0 8px 8px 0; position: relative">
                     <strong>${escapeHtml(subtimer.name)}:</strong> ${formatTime(subtimer.time)}
+                    <div class="task-note-block ${subNote ? '' : 'empty'}" style="margin-top: 6px; font-size: 12px">${subNote ? escapeHtml(subNote) : 'Нет заметки'}</div>
+                    <button class="btn-add-subtimer" onclick="editSubtimerNote(${payment.id}, ${subtimer.id})" style="padding: 4px 10px; font-size: 11px; margin-top: 6px; position: absolute; right: 10px; top: 5px;">📝 ${
+                    subNote ? 'Изменить заметку' : 'Добавить заметку'
+                  }</button>
                   </div>`;
                 }
               });
@@ -2409,6 +2485,12 @@
               if (!task.categories) {
                 task.categories = [];
               }
+              if (task.note === undefined) {
+                task.note = '';
+              }
+              (task.subtimers || []).forEach((st) => {
+                if (st.note === undefined) st.note = '';
+              });
               // Удаляем старые поля, если есть
               if (task.payments) {
                 delete task.payments;
@@ -2460,6 +2542,12 @@
                 if (!task.categories) {
                   task.categories = [];
                 }
+                if (task.note === undefined) {
+                  task.note = '';
+                }
+                (task.subtimers || []).forEach((st) => {
+                  if (st.note === undefined) st.note = '';
+                });
                 // Удаляем старые поля, если есть
                 if (task.payments) {
                   delete task.payments;
@@ -2574,6 +2662,7 @@
           subtimers: [],
           paymentStatus: 'unpaid',
           categories: selectedCats || [],
+          note: '',
         };
 
         tasks.push(newTask);
@@ -2608,7 +2697,7 @@
           // Запуск таймера - сохраняем временную метку старта
           task.isRunning = true;
           task.startTime = Date.now(); // Запоминаем время старта
-          
+
           // setInterval используется только для обновления UI
           timers[taskId] = setInterval(() => {
             updateTaskTime(taskId);
@@ -2698,6 +2787,59 @@
               cancelBtn.click();
             }
           };
+        });
+      }
+
+      // Показать модальное окно для редактирования заметки (textarea)
+      function showNoteModal(title, defaultValue = '') {
+        return new Promise((resolve) => {
+          const modal = document.getElementById('noteModal');
+          const titleEl = document.getElementById('noteModalTitle');
+          const textEl = document.getElementById('noteModalText');
+          const okBtn = document.getElementById('noteModalOk');
+          const cancelBtn = document.getElementById('noteModalCancel');
+
+          titleEl.textContent = title;
+          textEl.value = defaultValue;
+          modal.style.display = 'flex';
+          textEl.focus();
+
+          const onEscape = (e) => {
+            if (e.key === 'Escape') {
+              textEl.removeEventListener('keydown', onEscape);
+              cleanup();
+              resolve(null);
+            }
+          };
+
+          const cleanup = () => {
+            modal.style.display = 'none';
+            textEl.value = '';
+            textEl.removeEventListener('keydown', onEscape);
+            okBtn.onclick = null;
+            cancelBtn.onclick = null;
+            modal.onclick = null;
+          };
+
+          okBtn.onclick = () => {
+            const value = textEl.value.trim();
+            cleanup();
+            resolve(value);
+          };
+
+          cancelBtn.onclick = () => {
+            cleanup();
+            resolve(null);
+          };
+
+          modal.onclick = (e) => {
+            if (e.target === modal) {
+              cleanup();
+              resolve(null);
+            }
+          };
+
+          textEl.addEventListener('keydown', onEscape);
         });
       }
 
@@ -2992,6 +3134,7 @@
           name: subtimerName.trim(),
           time: 0,
           isRunning: false,
+          note: '',
         };
 
         task.subtimers.push(newSubtimer);
@@ -3027,7 +3170,7 @@
           // Запуск подтаймера - сохраняем временную метку старта
           subtimer.isRunning = true;
           subtimer.startTime = Date.now(); // Запоминаем время старта
-          
+
           // setInterval используется только для обновления UI
           timers[timerKey] = setInterval(() => {
             updateSubtimerTime(taskId, subtimerId);
@@ -3156,13 +3299,14 @@
           </div>
         `;
 
-            const categoriesHtml = task.categories && task.categories.length > 0
-              ? `
+            const categoriesHtml =
+              task.categories && task.categories.length > 0
+                ? `
                 <div class="task-categories">
                   ${task.categories.map((cat) => `<span class="task-category-badge">${escapeHtml(cat)}</span>`).join('')}
                 </div>
               `
-              : '';
+                : '';
 
             return `
           <div class="task-item" data-task-id="${task.id}">
@@ -3221,13 +3365,13 @@
             const elapsed = Math.floor((Date.now() - task.startTime) / 1000);
             task.time += elapsed;
             task.startTime = Date.now(); // Обновляем временную метку
-            
+
             // Перезапускаем таймер для обновления UI
             timers[task.id] = setInterval(() => {
               updateTaskTime(task.id);
             }, 1000);
           }
-          
+
           // Восстанавливаем все подтаймеры с учетом прошедшего времени
           if (task.subtimers) {
             task.subtimers.forEach((subtimer) => {
@@ -3235,7 +3379,7 @@
                 const elapsed = Math.floor((Date.now() - subtimer.startTime) / 1000);
                 subtimer.time += elapsed;
                 subtimer.startTime = Date.now(); // Обновляем временную метку
-                
+
                 // Перезапускаем подтаймер для обновления UI
                 const timerKey = `${task.id}_${subtimer.id}`;
                 timers[timerKey] = setInterval(() => {
