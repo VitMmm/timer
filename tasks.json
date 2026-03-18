@@ -43,8 +43,9 @@
         "id": 1773849472683.9812,
         "name": "Доработка",
         "time": 0,
-        "isRunning": false,
-        "note": ""
+        "isRunning": true,
+        "note": "",
+        "startTime": 1773849474782
       }
     ],
     "paymentStatus": "unpaid",
