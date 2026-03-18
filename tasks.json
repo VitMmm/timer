@@ -4,7 +4,15 @@
     "name": "Тайлер",
     "time": 15780,
     "isRunning": false,
-    "subtimers": [],
+    "subtimers": [
+      {
+        "id": 1773847642016.4705,
+        "name": "Доработка",
+        "time": 0,
+        "isRunning": false,
+        "note": ""
+      }
+    ],
     "paymentStatus": "unpaid",
     "categories": [
       "Tyler"
