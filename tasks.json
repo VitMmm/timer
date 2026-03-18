@@ -57,7 +57,7 @@
         "name": "Доработка",
         "time": 604,
         "isRunning": false,
-        "note": ""
+        "note": "Доработка табов (убрал задержку)\nПоправил трайстпайлот"
       }
     ],
     "paymentStatus": "unpaid",
