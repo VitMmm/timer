@@ -93,8 +93,9 @@
         "id": 1774642404590.9863,
         "name": "Обновление шрифтов",
         "time": 0,
-        "isRunning": false,
-        "note": ""
+        "isRunning": true,
+        "note": "",
+        "startTime": 1774642410167
       }
     ],
     "paymentStatus": "unpaid",
