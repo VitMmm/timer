@@ -93,8 +93,9 @@
         "id": 1774899656528.2979,
         "name": "Дорабока",
         "time": 193,
-        "isRunning": false,
-        "note": ""
+        "isRunning": true,
+        "note": "",
+        "startTime": 1774901123424
       }
     ],
     "paymentStatus": "unpaid",
