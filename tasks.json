@@ -88,7 +88,15 @@
     "name": "Tyler",
     "time": 39376,
     "isRunning": false,
-    "subtimers": [],
+    "subtimers": [
+      {
+        "id": 1774899656528.2979,
+        "name": "Дорабока",
+        "time": 0,
+        "isRunning": false,
+        "note": ""
+      }
+    ],
     "paymentStatus": "unpaid",
     "categories": [
       "Tyler"
