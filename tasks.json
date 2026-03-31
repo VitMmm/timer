@@ -108,13 +108,14 @@
     "id": 1774953231731,
     "name": "TMZ",
     "time": 7,
-    "isRunning": false,
+    "isRunning": true,
     "subtimers": [],
     "paymentStatus": "unpaid",
     "categories": [
       "Остальные"
     ],
     "note": "",
-    "previewImage": ""
+    "previewImage": "",
+    "startTime": 1774953251091
   }
 ]
