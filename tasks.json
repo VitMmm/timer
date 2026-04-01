@@ -2,15 +2,14 @@
   {
     "id": 1775054286313,
     "name": "Вайты",
-    "time": 0,
-    "isRunning": true,
+    "time": 5,
+    "isRunning": false,
     "subtimers": [],
     "paymentStatus": "unpaid",
     "categories": [
       "Остальные"
     ],
     "note": "",
-    "previewImage": "",
-    "startTime": 1775054292017
+    "previewImage": ""
   }
 ]
