@@ -15,15 +15,14 @@
   {
     "id": 1775154657328,
     "name": "Фикс анимации",
-    "time": 0,
-    "isRunning": true,
+    "time": 112,
+    "isRunning": false,
     "subtimers": [],
     "paymentStatus": "unpaid",
     "categories": [
       "Остальные"
     ],
     "note": "",
-    "previewImage": "",
-    "startTime": 1775154660111
+    "previewImage": ""
   }
 ]
