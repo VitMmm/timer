@@ -16,13 +16,14 @@
     "id": 1775228800535,
     "name": "Видос на TMZ",
     "time": 0,
-    "isRunning": false,
+    "isRunning": true,
     "subtimers": [],
     "paymentStatus": "unpaid",
     "categories": [
       "Остальные"
     ],
     "note": "",
-    "previewImage": ""
+    "previewImage": "",
+    "startTime": 1775228804564
   }
 ]
