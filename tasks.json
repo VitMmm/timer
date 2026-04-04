@@ -42,15 +42,14 @@
   {
     "id": 1775336305531,
     "name": "Рулетка",
-    "time": 0,
-    "isRunning": true,
+    "time": 1,
+    "isRunning": false,
     "subtimers": [],
     "paymentStatus": "unpaid",
     "categories": [
       "Остальные"
     ],
     "note": "",
-    "previewImage": "",
-    "startTime": 1775336327910
+    "previewImage": ""
   }
 ]
