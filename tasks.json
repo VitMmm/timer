@@ -3,13 +3,14 @@
     "id": 1778511979050,
     "name": "Вайты",
     "time": 0,
-    "isRunning": false,
+    "isRunning": true,
     "subtimers": [],
     "paymentStatus": "unpaid",
     "categories": [
       "Общее время"
     ],
     "note": "",
-    "previewImage": ""
+    "previewImage": "",
+    "startTime": 1778511980695
   }
 ]
