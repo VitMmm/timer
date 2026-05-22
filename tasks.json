@@ -16,13 +16,14 @@
     "id": 1779451997988,
     "name": "Forex Robot Hub",
     "time": 0,
-    "isRunning": false,
+    "isRunning": true,
     "subtimers": [],
     "paymentStatus": "unpaid",
     "categories": [
       "Общее время"
     ],
     "note": "",
-    "previewImage": ""
+    "previewImage": "",
+    "startTime": 1779451999981
   }
 ]
