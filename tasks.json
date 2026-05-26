@@ -29,13 +29,14 @@
     "id": 1779795308182,
     "name": "Forex Robot Hub Green",
     "time": 0,
-    "isRunning": false,
+    "isRunning": true,
     "subtimers": [],
     "paymentStatus": "unpaid",
     "categories": [
       "Общее время"
     ],
     "note": "",
-    "previewImage": ""
+    "previewImage": "",
+    "startTime": 1779795312231
   }
 ]
