@@ -30,7 +30,15 @@
     "name": "Forex Robot Hub Green",
     "time": 45419,
     "isRunning": false,
-    "subtimers": [],
+    "subtimers": [
+      {
+        "id": 1780215767700.5176,
+        "name": "Доработка",
+        "time": 0,
+        "isRunning": false,
+        "note": ""
+      }
+    ],
     "paymentStatus": "unpaid",
     "categories": [
       "Общее время"
