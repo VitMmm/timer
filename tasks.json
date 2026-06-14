@@ -30,7 +30,7 @@
     "id": 1781444552046,
     "name": "Tyler",
     "time": 0,
-    "isRunning": false,
+    "isRunning": true,
     "subtimers": [],
     "paymentStatus": "unpaid",
     "categories": [
@@ -38,6 +38,7 @@
       "Tyler"
     ],
     "note": "",
-    "previewImage": ""
+    "previewImage": "",
+    "startTime": 1781444554664
   }
 ]
