@@ -1,1 +1,15 @@
-[]
+[
+  {
+    "id": 1781444364277,
+    "name": "Tyler",
+    "time": 0,
+    "isRunning": false,
+    "subtimers": [],
+    "paymentStatus": "unpaid",
+    "categories": [
+      "Tyler"
+    ],
+    "note": "",
+    "previewImage": ""
+  }
+]
