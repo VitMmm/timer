@@ -2,15 +2,14 @@
   {
     "id": 1781444364277,
     "name": "Tyler",
-    "time": 0,
-    "isRunning": true,
+    "time": 1,
+    "isRunning": false,
     "subtimers": [],
     "paymentStatus": "unpaid",
     "categories": [
       "Tyler"
     ],
     "note": "",
-    "previewImage": "",
-    "startTime": 1781444370735
+    "previewImage": ""
   }
 ]
