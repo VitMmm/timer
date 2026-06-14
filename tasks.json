@@ -17,13 +17,14 @@
     "id": 1781444472954,
     "name": "Оптимизация лендов",
     "time": 0,
-    "isRunning": false,
+    "isRunning": true,
     "subtimers": [],
     "paymentStatus": "unpaid",
     "categories": [
       "Общее время"
     ],
     "note": "",
-    "previewImage": ""
+    "previewImage": "",
+    "startTime": 1781444534877
   }
 ]
