@@ -44,13 +44,14 @@
     "id": 1781444845571,
     "name": "Новые ленды",
     "time": 0,
-    "isRunning": false,
+    "isRunning": true,
     "subtimers": [],
     "paymentStatus": "unpaid",
     "categories": [
       "Общее время"
     ],
     "note": "",
-    "previewImage": ""
+    "previewImage": "",
+    "startTime": 1781444848879
   }
 ]
