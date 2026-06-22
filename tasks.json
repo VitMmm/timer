@@ -56,7 +56,7 @@
   {
     "id": 1782155324833,
     "name": "Тайлер",
-    "time": 0,
+    "time": 1,
     "isRunning": true,
     "subtimers": [],
     "paymentStatus": "unpaid",
@@ -66,6 +66,6 @@
     ],
     "note": "",
     "previewImage": "",
-    "startTime": 1782155328939
+    "startTime": 1782155331309
   }
 ]
