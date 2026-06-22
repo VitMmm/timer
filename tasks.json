@@ -57,7 +57,7 @@
     "id": 1782155324833,
     "name": "Тайлер",
     "time": 0,
-    "isRunning": false,
+    "isRunning": true,
     "subtimers": [],
     "paymentStatus": "unpaid",
     "categories": [
@@ -65,6 +65,7 @@
       "Общее время"
     ],
     "note": "",
-    "previewImage": ""
+    "previewImage": "",
+    "startTime": 1782155328939
   }
 ]
