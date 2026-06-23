@@ -45,7 +45,15 @@
     "name": "Новые ленды",
     "time": 5182,
     "isRunning": false,
-    "subtimers": [],
+    "subtimers": [
+      {
+        "id": 1782216461315.768,
+        "name": "Обновление 574",
+        "time": 0,
+        "isRunning": false,
+        "note": ""
+      }
+    ],
     "paymentStatus": "unpaid",
     "categories": [
       "Общее время"
