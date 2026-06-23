@@ -49,10 +49,9 @@
       {
         "id": 1782216461315.768,
         "name": "Обновление 574",
-        "time": 0,
-        "isRunning": true,
-        "note": "",
-        "startTime": 1782216463671
+        "time": 3583,
+        "isRunning": false,
+        "note": ""
       }
     ],
     "paymentStatus": "unpaid",
