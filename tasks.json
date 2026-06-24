@@ -71,8 +71,9 @@
         "id": 1782306754277.4558,
         "name": "+ форма в шапке",
         "time": 0,
-        "isRunning": false,
-        "note": ""
+        "isRunning": true,
+        "note": "",
+        "startTime": 1782306755694
       }
     ],
     "paymentStatus": "unpaid",
