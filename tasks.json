@@ -95,7 +95,15 @@
     "name": "489й ленд новый текст",
     "time": 6853,
     "isRunning": false,
-    "subtimers": [],
+    "subtimers": [
+      {
+        "id": 1782767308696.1165,
+        "name": "новые скрины на 489 и новый",
+        "time": 0,
+        "isRunning": false,
+        "note": ""
+      }
+    ],
     "paymentStatus": "unpaid",
     "categories": [
       "Tyler",
