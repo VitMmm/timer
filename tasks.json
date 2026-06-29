@@ -94,7 +94,7 @@
     "id": 1782722075135,
     "name": "489й ленд новый текст",
     "time": 0,
-    "isRunning": false,
+    "isRunning": true,
     "subtimers": [],
     "paymentStatus": "unpaid",
     "categories": [
@@ -102,6 +102,7 @@
       "Общее время"
     ],
     "note": "",
-    "previewImage": ""
+    "previewImage": "",
+    "startTime": 1782722078106
   }
 ]
