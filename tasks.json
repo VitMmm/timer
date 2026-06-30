@@ -106,10 +106,9 @@
       {
         "id": 1782832653714.4614,
         "name": "588й редактирование текста",
-        "time": 0,
-        "isRunning": true,
-        "note": "",
-        "startTime": 1782832655478
+        "time": 1676,
+        "isRunning": false,
+        "note": ""
       }
     ],
     "paymentStatus": "unpaid",
