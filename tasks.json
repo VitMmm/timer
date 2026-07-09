@@ -2,8 +2,8 @@
   {
     "id": 1783600998190,
     "name": "Мелки правки от Димы",
-    "time": 0,
-    "isRunning": true,
+    "time": 1,
+    "isRunning": false,
     "subtimers": [],
     "paymentStatus": "unpaid",
     "categories": [
@@ -11,7 +11,6 @@
       "Общее время"
     ],
     "note": "",
-    "previewImage": "",
-    "startTime": 1783601004841
+    "previewImage": ""
   }
 ]
