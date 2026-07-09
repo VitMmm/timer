@@ -16,8 +16,8 @@
   {
     "id": 1783601395395,
     "name": "Обнова лендов",
-    "time": 0,
-    "isRunning": true,
+    "time": 9,
+    "isRunning": false,
     "subtimers": [],
     "paymentStatus": "unpaid",
     "categories": [
@@ -25,7 +25,6 @@
       "Общее время"
     ],
     "note": "",
-    "previewImage": "",
-    "startTime": 1783601397395
+    "previewImage": ""
   }
 ]
