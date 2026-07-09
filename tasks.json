@@ -3,7 +3,7 @@
     "id": 1783600998190,
     "name": "Мелки правки от Димы",
     "time": 0,
-    "isRunning": false,
+    "isRunning": true,
     "subtimers": [],
     "paymentStatus": "unpaid",
     "categories": [
@@ -11,6 +11,7 @@
       "Общее время"
     ],
     "note": "",
-    "previewImage": ""
+    "previewImage": "",
+    "startTime": 1783601004841
   }
 ]
