@@ -26,5 +26,18 @@
     ],
     "note": "595 и 401 замена картинок",
     "previewImage": ""
+  },
+  {
+    "id": 1784572220294,
+    "name": "Перенос лендов на другие издания",
+    "time": 0,
+    "isRunning": false,
+    "subtimers": [],
+    "paymentStatus": "unpaid",
+    "categories": [
+      "Общее время"
+    ],
+    "note": "",
+    "previewImage": ""
   }
 ]
