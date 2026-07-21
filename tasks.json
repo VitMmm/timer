@@ -50,5 +50,18 @@
     "categories": [],
     "note": "",
     "previewImage": ""
+  },
+  {
+    "id": 1784637240920,
+    "name": "Оптимизация лендов",
+    "time": 0,
+    "isRunning": false,
+    "subtimers": [],
+    "paymentStatus": "unpaid",
+    "categories": [
+      "Общее время"
+    ],
+    "note": "",
+    "previewImage": ""
   }
 ]
