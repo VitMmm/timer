@@ -47,7 +47,9 @@
     "isRunning": false,
     "subtimers": [],
     "paymentStatus": "unpaid",
-    "categories": [],
+    "categories": [
+      "Общее время"
+    ],
     "note": "",
     "previewImage": ""
   },
