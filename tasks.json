@@ -1,19 +1,5 @@
 [
   {
-    "id": 1783601395395,
-    "name": "Обнова лендов",
-    "time": 3318,
-    "isRunning": false,
-    "subtimers": [],
-    "paymentStatus": "unpaid",
-    "categories": [
-      "Tyler",
-      "Общее время"
-    ],
-    "note": "595 и 401 замена картинок",
-    "previewImage": ""
-  },
-  {
     "id": 1784572303576,
     "name": "Перекрас лендов",
     "time": 3524,
