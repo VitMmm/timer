@@ -14,19 +14,6 @@
     "previewImage": ""
   },
   {
-    "id": 1784572220294,
-    "name": "Перенос лендов на другие издания",
-    "time": 5505,
-    "isRunning": false,
-    "subtimers": [],
-    "paymentStatus": "unpaid",
-    "categories": [
-      "Общее время"
-    ],
-    "note": "",
-    "previewImage": ""
-  },
-  {
     "id": 1784572303576,
     "name": "Перекрас лендов",
     "time": 3524,
