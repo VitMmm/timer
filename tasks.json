@@ -11,5 +11,18 @@
     ],
     "note": "",
     "previewImage": ""
+  },
+  {
+    "id": 1785785993831,
+    "name": "Мелкие задачи Коли",
+    "time": 0,
+    "isRunning": false,
+    "subtimers": [],
+    "paymentStatus": "unpaid",
+    "categories": [
+      "Общее время"
+    ],
+    "note": "",
+    "previewImage": ""
   }
 ]
