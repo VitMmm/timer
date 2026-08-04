@@ -24,5 +24,18 @@
     ],
     "note": "",
     "previewImage": ""
+  },
+  {
+    "id": 1785869241308,
+    "name": "Forex Mini App",
+    "time": 0,
+    "isRunning": false,
+    "subtimers": [],
+    "paymentStatus": "unpaid",
+    "categories": [
+      "Общее время"
+    ],
+    "note": "",
+    "previewImage": ""
   }
 ]
