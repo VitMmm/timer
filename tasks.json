@@ -35,8 +35,9 @@
         "id": 1785869268809.2673,
         "name": "Preloader",
         "time": 0,
-        "isRunning": false,
-        "note": ""
+        "isRunning": true,
+        "note": "",
+        "startTime": 1785869269889
       }
     ],
     "paymentStatus": "unpaid",
