@@ -17,7 +17,15 @@
     "name": "Мелкие задачи Коли",
     "time": 923,
     "isRunning": false,
-    "subtimers": [],
+    "subtimers": [
+      {
+        "id": 1785956130599.9404,
+        "name": "+ мелкие от Димы",
+        "time": 0,
+        "isRunning": false,
+        "note": ""
+      }
+    ],
     "paymentStatus": "unpaid",
     "categories": [
       "Общее время"
