@@ -58,13 +58,14 @@
     "id": 1785956166702,
     "name": "Верстка Tyler",
     "time": 0,
-    "isRunning": false,
+    "isRunning": true,
     "subtimers": [],
     "paymentStatus": "unpaid",
     "categories": [
       "Общее время"
     ],
     "note": "",
-    "previewImage": ""
+    "previewImage": "",
+    "startTime": 1785956194969
   }
 ]
