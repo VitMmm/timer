@@ -29,8 +29,9 @@
         "id": 1786092706488.9548,
         "name": "смена издания на 389",
         "time": 270,
-        "isRunning": false,
-        "note": ""
+        "isRunning": true,
+        "note": "",
+        "startTime": 1786099322848
       }
     ],
     "paymentStatus": "unpaid",
