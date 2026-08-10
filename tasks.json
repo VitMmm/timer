@@ -8,10 +8,9 @@
       {
         "id": 1786385567476.0398,
         "name": "Еще раз замена видео отзывов",
-        "time": 0,
-        "isRunning": true,
-        "note": "",
-        "startTime": 1786385568904
+        "time": 1788,
+        "isRunning": false,
+        "note": ""
       }
     ],
     "paymentStatus": "unpaid",
