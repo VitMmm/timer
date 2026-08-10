@@ -4,7 +4,15 @@
     "name": "Замена видео-отзывов Daniel, Nicolas, Hugh",
     "time": 1153,
     "isRunning": false,
-    "subtimers": [],
+    "subtimers": [
+      {
+        "id": 1786385567476.0398,
+        "name": "Еще раз замена видео отзывов",
+        "time": 0,
+        "isRunning": false,
+        "note": ""
+      }
+    ],
     "paymentStatus": "unpaid",
     "categories": [
       "Общее время"
