@@ -77,7 +77,7 @@
   {
     "id": 1786385296321,
     "name": "Мелкие задачи Димы",
-    "time": 0,
+    "time": 300,
     "isRunning": false,
     "subtimers": [],
     "paymentStatus": "unpaid",
