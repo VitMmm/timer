@@ -74,6 +74,13 @@
         "time": 7559,
         "isRunning": false,
         "note": ""
+      },
+      {
+        "id": 1786617198335.8547,
+        "name": "Страница регистрации",
+        "time": 0,
+        "isRunning": false,
+        "note": ""
       }
     ],
     "paymentStatus": "unpaid",
