@@ -78,10 +78,9 @@
       {
         "id": 1786732102327.1936,
         "name": "Strategy Setup",
-        "time": 0,
-        "isRunning": true,
-        "note": "",
-        "startTime": 1786732103882
+        "time": 8940,
+        "isRunning": false,
+        "note": ""
       }
     ],
     "paymentStatus": "unpaid",
