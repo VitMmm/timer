@@ -58,8 +58,9 @@
         "id": 1787143984292.5374,
         "name": "382й в новую оболочку",
         "time": 0,
-        "isRunning": false,
-        "note": ""
+        "isRunning": true,
+        "note": "",
+        "startTime": 1787143986138
       }
     ],
     "paymentStatus": "unpaid",
