@@ -65,8 +65,9 @@
         "id": 1787307927624.597,
         "name": "Daily Mail News",
         "time": 0,
-        "isRunning": false,
-        "note": ""
+        "isRunning": true,
+        "note": "",
+        "startTime": 1787307929406
       }
     ],
     "paymentStatus": "unpaid",
