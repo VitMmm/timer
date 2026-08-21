@@ -66,7 +66,7 @@
         "name": "Daily Mail News",
         "time": 1,
         "isRunning": true,
-        "note": "",
+        "note": "Выкачка шаблона + замена текста",
         "startTime": 1787307931556
       }
     ],
