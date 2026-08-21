@@ -64,10 +64,9 @@
       {
         "id": 1787307927624.597,
         "name": "Daily Mail News",
-        "time": 1,
-        "isRunning": true,
-        "note": "Выкачка шаблона + замена текста",
-        "startTime": 1787307931556
+        "time": 405,
+        "isRunning": false,
+        "note": "Выкачка шаблона + замена текста"
       }
     ],
     "paymentStatus": "unpaid",
