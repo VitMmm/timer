@@ -141,13 +141,14 @@
     "id": 1786984464215,
     "name": "Forex Robot Hub - локализация под Немецкий",
     "time": 1843,
-    "isRunning": false,
+    "isRunning": true,
     "subtimers": [],
     "paymentStatus": "unpaid",
     "categories": [
       "Общее время"
     ],
     "note": "",
-    "previewImage": ""
+    "previewImage": "",
+    "startTime": 1787306360770
   }
 ]
