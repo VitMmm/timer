@@ -65,8 +65,9 @@
         "id": 1787477990922.6116,
         "name": "644й + 389й в новый тмз",
         "time": 0,
-        "isRunning": false,
-        "note": ""
+        "isRunning": true,
+        "note": "",
+        "startTime": 1787483079236
       }
     ],
     "paymentStatus": "unpaid",
