@@ -5,12 +5,13 @@
     "time": 1101,
     "isRunning": false,
     "subtimers": [],
-    "paymentStatus": "unpaid",
+    "paymentStatus": "paid",
     "categories": [
       "Общее время"
     ],
     "note": "",
-    "previewImage": ""
+    "previewImage": "",
+    "datePaid": "2026-09-01T12:12:56.432Z"
   },
   {
     "id": 1786731389672,
@@ -18,13 +19,14 @@
     "time": 14701,
     "isRunning": false,
     "subtimers": [],
-    "paymentStatus": "unpaid",
+    "paymentStatus": "paid",
     "categories": [
       "Tyler",
       "Общее время"
     ],
     "note": "",
-    "previewImage": ""
+    "previewImage": "",
+    "datePaid": "2026-09-01T12:12:57.147Z"
   },
   {
     "id": 1786984464215,
