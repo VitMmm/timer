@@ -14,31 +14,17 @@
     "datePaid": "2026-09-01T12:12:56.432Z"
   },
   {
-    "id": 1786731389672,
-    "name": "Tyler - страница регистрации",
-    "time": 14701,
-    "isRunning": false,
-    "subtimers": [],
-    "paymentStatus": "paid",
-    "categories": [
-      "Tyler",
-      "Общее время"
-    ],
-    "note": "",
-    "previewImage": "",
-    "datePaid": "2026-09-01T12:12:57.147Z"
-  },
-  {
     "id": 1786984464215,
     "name": "Forex Robot Hub - локализация под Немецкий",
     "time": 3597,
     "isRunning": false,
     "subtimers": [],
-    "paymentStatus": "unpaid",
+    "paymentStatus": "paid",
     "categories": [
       "Общее время"
     ],
     "note": "",
-    "previewImage": ""
+    "previewImage": "",
+    "datePaid": "2026-09-01T12:12:59.304Z"
   }
 ]
