@@ -13,12 +13,13 @@
         "note": ""
       }
     ],
-    "paymentStatus": "unpaid",
+    "paymentStatus": "paid",
     "categories": [
       "Общее время"
     ],
     "note": "",
-    "previewImage": ""
+    "previewImage": "",
+    "datePaid": "2026-09-01T12:12:44.508Z"
   },
   {
     "id": 1785785993831,
