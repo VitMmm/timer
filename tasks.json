@@ -4,7 +4,15 @@
     "name": "Задачи Коли",
     "time": 0,
     "isRunning": false,
-    "subtimers": [],
+    "subtimers": [
+      {
+        "id": 1788468698175.7878,
+        "name": "662й",
+        "time": 0,
+        "isRunning": false,
+        "note": ""
+      }
+    ],
     "paymentStatus": "unpaid",
     "categories": [
       "Общее время"
