@@ -1,1 +1,15 @@
-[]
+[
+  {
+    "id": 1788468689842,
+    "name": "Задачи Коли",
+    "time": 0,
+    "isRunning": false,
+    "subtimers": [],
+    "paymentStatus": "unpaid",
+    "categories": [
+      "Общее время"
+    ],
+    "note": "",
+    "previewImage": ""
+  }
+]
