@@ -19,5 +19,18 @@
     ],
     "note": "",
     "previewImage": ""
+  },
+  {
+    "id": 1788468722050,
+    "name": "Задачи Димы",
+    "time": 0,
+    "isRunning": false,
+    "subtimers": [],
+    "paymentStatus": "unpaid",
+    "categories": [
+      "Общее время"
+    ],
+    "note": "",
+    "previewImage": ""
   }
 ]
