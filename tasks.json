@@ -23,8 +23,9 @@
         "id": 1788869604231.8682,
         "name": "668й",
         "time": 0,
-        "isRunning": false,
-        "note": ""
+        "isRunning": true,
+        "note": "",
+        "startTime": 1788869608138
       }
     ],
     "paymentStatus": "unpaid",
