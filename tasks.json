@@ -50,8 +50,8 @@
   {
     "id": 1789500043150,
     "name": "Pocket Alpha",
-    "time": 0,
-    "isRunning": true,
+    "time": 1,
+    "isRunning": false,
     "subtimers": [],
     "paymentStatus": "unpaid",
     "categories": [
@@ -59,7 +59,6 @@
       "Общее время"
     ],
     "note": "",
-    "previewImage": "",
-    "startTime": 1789500053426
+    "previewImage": ""
   }
 ]
