@@ -46,5 +46,19 @@
     ],
     "note": "",
     "previewImage": ""
+  },
+  {
+    "id": 1789500043150,
+    "name": "Pocket Alpha",
+    "time": 0,
+    "isRunning": false,
+    "subtimers": [],
+    "paymentStatus": "unpaid",
+    "categories": [
+      "Tyler",
+      "Общее время"
+    ],
+    "note": "",
+    "previewImage": ""
   }
 ]
