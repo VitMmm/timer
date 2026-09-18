@@ -65,7 +65,7 @@
     "id": 1789732119152,
     "name": "Pocket Alpha App - Academy",
     "time": 0,
-    "isRunning": false,
+    "isRunning": true,
     "subtimers": [],
     "paymentStatus": "unpaid",
     "categories": [
@@ -73,6 +73,7 @@
       "Общее время"
     ],
     "note": "",
-    "previewImage": ""
+    "previewImage": "",
+    "startTime": 1789732121230
   }
 ]
