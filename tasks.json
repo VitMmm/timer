@@ -64,7 +64,7 @@
   {
     "id": 1789732119152,
     "name": "Pocket Alpha App - Academy",
-    "time": 0,
+    "time": 1,
     "isRunning": true,
     "subtimers": [],
     "paymentStatus": "unpaid",
@@ -74,6 +74,6 @@
     ],
     "note": "",
     "previewImage": "",
-    "startTime": 1789732121230
+    "startTime": 1789732123570
   }
 ]
