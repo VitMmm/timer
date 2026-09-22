@@ -79,7 +79,7 @@
     "id": 1790103930969,
     "name": "Tyler",
     "time": 0,
-    "isRunning": false,
+    "isRunning": true,
     "subtimers": [],
     "paymentStatus": "unpaid",
     "categories": [
@@ -87,6 +87,7 @@
       "Общее время"
     ],
     "note": "",
-    "previewImage": ""
+    "previewImage": "",
+    "startTime": 1790103933159
   }
 ]
