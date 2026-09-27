@@ -29,10 +29,9 @@
       {
         "id": 1790500155388.045,
         "name": "677й и 678й",
-        "time": 0,
-        "isRunning": true,
-        "note": "",
-        "startTime": 1790500158038
+        "time": 927,
+        "isRunning": false,
+        "note": ""
       }
     ],
     "paymentStatus": "unpaid",
