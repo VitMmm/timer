@@ -1,47 +1,5 @@
 [
   {
-    "id": 1788468689842,
-    "name": "Задачи Коли",
-    "time": 0,
-    "isRunning": false,
-    "subtimers": [
-      {
-        "id": 1788468698175.7878,
-        "name": "662й",
-        "time": 1118,
-        "isRunning": false,
-        "note": ""
-      },
-      {
-        "id": 1788706343525.6423,
-        "name": "665й",
-        "time": 1160,
-        "isRunning": false,
-        "note": ""
-      },
-      {
-        "id": 1788869604231.8682,
-        "name": "668й",
-        "time": 1090,
-        "isRunning": false,
-        "note": ""
-      },
-      {
-        "id": 1790500155388.045,
-        "name": "677й и 678й",
-        "time": 1782,
-        "isRunning": false,
-        "note": ""
-      }
-    ],
-    "paymentStatus": "unpaid",
-    "categories": [
-      "Общее время"
-    ],
-    "note": "",
-    "previewImage": ""
-  },
-  {
     "id": 1788468722050,
     "name": "Задачи Димы",
     "time": 3960,
