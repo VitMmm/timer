@@ -25,5 +25,19 @@
     ],
     "note": "",
     "previewImage": ""
+  },
+  {
+    "id": 1791841308397,
+    "name": "Tyler Pocket",
+    "time": 0,
+    "isRunning": false,
+    "subtimers": [],
+    "paymentStatus": "unpaid",
+    "categories": [
+      "Tyler",
+      "Общее время"
+    ],
+    "note": "",
+    "previewImage": ""
   }
 ]
