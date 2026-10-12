@@ -30,7 +30,7 @@
     "id": 1791841308397,
     "name": "Tyler Pocket",
     "time": 0,
-    "isRunning": false,
+    "isRunning": true,
     "subtimers": [],
     "paymentStatus": "unpaid",
     "categories": [
@@ -38,6 +38,7 @@
       "Общее время"
     ],
     "note": "",
-    "previewImage": ""
+    "previewImage": "",
+    "startTime": 1791841314897
   }
 ]
