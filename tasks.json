@@ -22,7 +22,7 @@
       {
         "id": 1792773001524.8472,
         "name": "переход в телегу",
-        "time": 0,
+        "time": 1337,
         "isRunning": false,
         "note": ""
       }
@@ -53,7 +53,15 @@
     "name": "Мелкие задачи Коли",
     "time": 0,
     "isRunning": false,
-    "subtimers": [],
+    "subtimers": [
+      {
+        "id": 1792773063709.1172,
+        "name": "обнова 622",
+        "time": 0,
+        "isRunning": false,
+        "note": ""
+      }
+    ],
     "paymentStatus": "unpaid",
     "categories": [
       "Общее время"
