@@ -18,7 +18,15 @@
     "name": "Мелкие задачи Димы",
     "time": 1260,
     "isRunning": false,
-    "subtimers": [],
+    "subtimers": [
+      {
+        "id": 1792773001524.8472,
+        "name": "переход в телегу",
+        "time": 0,
+        "isRunning": false,
+        "note": ""
+      }
+    ],
     "paymentStatus": "unpaid",
     "categories": [
       "Общее время"
