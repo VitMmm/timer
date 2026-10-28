@@ -79,8 +79,9 @@
         "id": 1793215417331.079,
         "name": "5 новых тайлеров",
         "time": 0,
-        "isRunning": false,
-        "note": ""
+        "isRunning": true,
+        "note": "",
+        "startTime": 1793215419217
       }
     ],
     "paymentStatus": "unpaid",
