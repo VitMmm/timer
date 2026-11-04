@@ -27,13 +27,6 @@
     "isRunning": false,
     "subtimers": [
       {
-        "id": 1792773063709.1172,
-        "name": "обнова 622",
-        "time": 1263,
-        "isRunning": false,
-        "note": ""
-      },
-      {
         "id": 1793024937505.538,
         "name": "new york times",
         "time": 13718,
