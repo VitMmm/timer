@@ -50,8 +50,8 @@
   {
     "id": 1794342701154,
     "name": "6 тайлеров",
-    "time": 0,
-    "isRunning": false,
+    "time": 1200,
+    "isRunning": true,
     "subtimers": [],
     "paymentStatus": "unpaid",
     "categories": [
@@ -59,6 +59,7 @@
       "Общее время"
     ],
     "note": "",
-    "previewImage": ""
+    "previewImage": "",
+    "startTime": 1794342727228
   }
 ]
