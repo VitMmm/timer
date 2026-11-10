@@ -32,5 +32,19 @@
     ],
     "note": "",
     "previewImage": ""
+  },
+  {
+    "id": 1794342637566,
+    "name": "Оптимизация Tyler",
+    "time": 0,
+    "isRunning": false,
+    "subtimers": [],
+    "paymentStatus": "unpaid",
+    "categories": [
+      "Tyler",
+      "Общее время"
+    ],
+    "note": "",
+    "previewImage": ""
   }
 ]
