@@ -42,10 +42,9 @@
       {
         "id": 1794751444375.0222,
         "name": "Остальные ленды",
-        "time": 0,
-        "isRunning": true,
-        "note": "",
-        "startTime": 1794751447551
+        "time": 4342,
+        "isRunning": false,
+        "note": ""
       }
     ],
     "paymentStatus": "unpaid",
